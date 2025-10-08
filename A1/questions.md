@@ -1,37 +1,30 @@
-🧭 Contesto e abitudini
+1. Puoi descrivermi una tua giornata tipo quando studi/lavori?
 
-1. Puoi raccontarmi in che modo gestisci i tuoi pasti quando sei fuori città o lontano da casa?
+2. Invece, in che modo gestisci i tuoi pasti durante tutta la settimana?
 
-2. Ti capita spesso di avanzare del cibo o di buttarlo via quando sei in viaggio o in trasferta?
+3. Ti capita spesso di avanzare del cibo o di buttarlo via?
 
-3. In quali situazioni pensi di sprecare più cibo quando non sei a casa (es. ristoranti, alloggi, supermercati)?
+4. Quali potrebbero essere secondo te tre vantaggi del conservare e riutilizzare il cibo?
 
-4. Quali sono le principali difficoltà nel conservare o riutilizzare il cibo quando sei fuori sede?
+5. E tre difficoltà/svantaggi?
 
-💡 Comportamenti e motivazioni
+6. Cosa ti spinge a scegliere cosa e quanto comprare?
 
-5. Cosa ti spinge a scegliere cosa e quanto comprare quando sei lontano da casa?
+7. Ti capita di organizzare i pasti in anticipo o decidi giorno per giorno?
 
-6. Ti capita di organizzare i pasti in anticipo (meal planning) o decidi giorno per giorno?
+8. Quali strategie usi, se ne usi, per evitare sprechi alimentari?
 
-7. Quali strategie usi, se ne usi, per evitare sprechi alimentari?
+9. C’è qualcosa che ti impedisce di ridurre ulteriormente lo spreco?
 
-8. C’è qualcosa che ti impedisce di ridurre ulteriormente lo spreco (tempo, strumenti, informazioni, convenienza, ecc.)?
+10. Conosci o hai mai usato applicazioni o servizi che aiutano a ridurre lo spreco alimentare?
+    (es. Too Good To Go, Olio, ecc.)
 
-⚙️ Soluzioni esistenti e percezione
+11. Se sì, come ti sei trovato? Se no, perché non li usi?
 
-9. Conosci o hai mai usato applicazioni o servizi che aiutano a ridurre lo spreco alimentare (es. Too Good To Go, Olio, ecc.)?
+12. Quanto è importante per te la sostenibilità o la riduzione degli sprechi?
 
-10. Se sì, come ti sei trovato? Se no, perché non li usi?
+13. Ti senti personalmente responsabile dello spreco alimentare o pensi che sia più un problema di ristoranti/supermercati?
 
-11. Quali caratteristiche ti piacerebbe avere in una soluzione o app che ti aiuti a non sprecare cibo quando sei fuori casa?
+14. C’è qualcosa che ti motiverebbe di più a cambiare le tue abitudini alimentari per ridurre lo spreco?
 
-12. Secondo te, quali tipi di iniziative potrebbero essere più efficaci per ridurre lo spreco alimentare tra chi viaggia o vive temporaneamente in un luogo?
-
-🧠 Attitudini e valori
-
-13. Quanto è importante per te la sostenibilità o la riduzione degli sprechi quando viaggi o mangi fuori?
-
-14. Ti senti personalmente responsabile dello spreco alimentare o pensi che sia più un problema di ristoranti/supermercati?
-
-15. C’è qualcosa che ti motiverebbe di più a cambiare le tue abitudini alimentari per ridurre lo spreco?
+15. Ci sono domande che avresti voluto ti facessi riguardo al tema dello spreco alimentare e che non ti ho fatto?
