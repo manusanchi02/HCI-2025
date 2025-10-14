@@ -2,31 +2,33 @@
 
 2. Invece, in che modo gestisci i tuoi pasti durante tutta la settimana?
 
-3. Quali sono, secondo te, tre aspetti positivi del conservare e riutilizzare il cibo?
+3. Hai esigenze alimentari particolari? (es. allergie o diete)
 
-4. E tre difficoltà/svantaggi?
+4. Quali sono, secondo te, tre aspetti positivi del conservare e riutilizzare il cibo?
 
-5. Quanto tempo dedichi alla preparazione dei pasti durante la giornata?
+5. E tre difficoltà/svantaggi?
 
-6. Ti capita mai di dover buttare del cibo? Se si, per quale motivo?
+6. Quanto tempo dedichi alla preparazione dei pasti durante la giornata? (es. scorsa settimana)
 
-7. Cosa ti spinge a scegliere cosa e quanto cibo comprare?
+7. Ti capita mai di dover buttare del cibo? Se si, per quale motivo?
 
-8. Ti capita di organizzare i pasti in anticipo o decidi cosa mangiare giorno per giorno?
+8. Cosa ti spinge a scegliere cosa e quanto cibo comprare?
 
-9. Quali strategie usi, se ne usi, per evitare sprechi alimentari?
+9. Ti capita di organizzare i pasti in anticipo o decidi cosa mangiare giorno per giorno?
 
-10. C’è qualcosa che ti impedisce di ridurre ulteriormente lo spreco?
+10.  Quali strategie usi, se ne usi, per evitare sprechi alimentari?
 
-11. Conosci o hai mai usato applicazioni o servizi che aiutano a ridurre lo spreco alimentare?
+11. C’è qualcosa che ti impedisce di ridurre ulteriormente lo spreco?
+
+12. Conosci o hai mai usato applicazioni o servizi che aiutano a ridurre lo spreco alimentare?
     (es. Too Good To Go, Olio, ecc.)
 
-12. Se sì, come ti sei trovato? Se no, perché non li usi?
+13. Se sì, come ti sei trovato? Se no, perché non li usi?
 
-13. Quanto sono importanti per te la sostenibilità e la riduzione degli sprechi?
+14. Quanto sono importanti per te la sostenibilità e la riduzione degli sprechi?
 
-14. Ti senti personalmente responsabile dello spreco alimentare o pensi che sia più un problema di ristoranti/supermercati?
+15. Ti senti personalmente responsabile dello spreco alimentare o pensi che sia più un problema di ristoranti/supermercati?
 
-15. C’è qualcosa che ti motiverebbe di più a cambiare le tue abitudini alimentari per ridurre lo spreco?
+16. C’è qualcosa che ti motiverebbe di più a cambiare le tue abitudini alimentari per ridurre lo spreco?
 
-16. Ci sono domande che avresti voluto ti facessi riguardo al tema dello spreco alimentare e che non ti ho fatto?
+17. Ci sono domande che avresti voluto ti facessi riguardo al tema dello spreco alimentare e che non ti ho fatto? 
