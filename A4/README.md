@@ -7,4 +7,4 @@ POMODHERO - Diventa l’eroe che salva il cibo e lo condivide con chi ne ha biso
 # Paper protoype
 Abbiamo scelto di realizzare il medium-fidelity-prototype degli screen di aggiunta della ricetta con relativi ingredienti. In questo modo, navigando la soluzione con il progetto Figma, è possibile testare la navigazione di un'intera funzionalità della nostra app, ovvero quella dell'agenda settimanale dei pasti. Non abbiamo spostato alcuna funzionalità tra i vari screen rispetto a quanto mostrato nel low-fidelity-prototype.
 # Link Figma
-A [questo link]() si può trovare il progetto Figma con il quale è possibile testare questa fase della progettazione
+A [questo link](https://www.figma.com/design/DVdODRHKhWLkm9xpYxoPBB/Mid-Fy-Pomodhero?node-id=0-1&t=GUJOVkRKATGp3wMk-1) si può trovare il progetto Figma con il quale è possibile testare questa fase della progettazione
