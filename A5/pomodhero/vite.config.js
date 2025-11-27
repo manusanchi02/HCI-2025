@@ -15,7 +15,7 @@ export default defineConfig({
       '@': fileURLToPath(new URL('./src', import.meta.url))
     },
   },
-  //base: '/HCI-2025/',
+  base: '/HCI-2025/',
   build: {
     outDir: 'docs',
   }
