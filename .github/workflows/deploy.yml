@@ -1,0 +1,30 @@
+name: Deploy to Docs
+
+on:
+  push:
+    paths:
+      - "A5/pomodhero/dist/**"
+    branches:
+      - A5
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Clean docs folder
+        run: rm -rf docs/*
+
+      - name: Copy dist -> docs
+        run: cp -r A5/pomodhero/dist/* docs/
+
+      - name: Commit updated files
+        run: |
+          git config user.name "github-actions"
+          git config user.email "github-actions@github.com"
+          git add docs
+          git commit -m "Automatic deploy from dist"
+          git push
