@@ -2,11 +2,11 @@
   	<div :class="$style.chatList">
     		<div :class="$style.header">
       			<div :class="$style.leftheader">
-        				<img :class="$style.leftheaderChild" alt="" src="../assets/images/BackIcon.svg"/>
+        				<img :class="$style.leftheaderChild" alt="" src="../assets/images/back.svg"/>
         				<b :class="$style.pomodhero">Chat</b>
       			</div>
       			<div :class="$style.rightheader">
-        				<img :class="$style.icon" alt="" src="../assets/images/Icon-3.svg"/>
+        				<img :class="$style.icon" alt="" src="../assets/images/logo.svg"/>
       			</div>
     		</div>
     		<div :class="$style.content">
@@ -43,15 +43,15 @@
     		</div>
     		<div :class="$style.tabbar">
       			<div :class="$style.home">
-        				<img :class="$style.icon2" alt="" src="../assets/images/Icon-2.svg"/>
+        				<img :class="$style.icon2" alt="" src="../assets/images/home.svg"/>
         				<div :class="$style.home2">home</div>
       			</div>
       			<div :class="$style.home">
-						<img :class="$style.icon2" alt="" src="../assets/images/Icon-1.svg"/>
+						<img :class="$style.icon2" alt="" src="../assets/images/market.svg"/>
         				<div :class="$style.home2">bacheca</div>
       			</div>
       			<div :class="$style.chat">
-        				<img :class="$style.icon2" alt=""  src="../assets/images/Icon.svg"/>
+        				<img :class="$style.icon2" alt=""  src="../assets/images/chat.svg"/>
         				<div :class="$style.home2">chat</div>
       			</div>
     		</div>
@@ -61,9 +61,7 @@
   	width: 100%;
   	height: 933px;
   	position: relative;
-  	border-radius: 28px;
   	background-color: #f2f4f2;
-  	border: 8px solid #cac4d0;
   	box-sizing: border-box;
   	overflow: hidden;
   	display: flex;
@@ -162,7 +160,7 @@
     		color: #000;
   	}
   	.frameParent {
-    		width: 385px;
+    		width: 100%;
     		height: 80px;
     		position: relative;
     		border-radius: 25px;
