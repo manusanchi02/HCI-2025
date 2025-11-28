@@ -3,13 +3,19 @@ import ChatListView from './views/ChatListView.vue';
 import ChatView from './views/ChatView.vue';
 import Market from './views/MarketView.vue';
 import MarketDetailsView from './views/MarketDetailsView.vue';
+import HomeView from './views/HomeView.vue';
+import DayDetails from './views/DayDetails.vue';
+import RecipieDetails from './views/RecipieDetails.vue';
 
 export default {
     components: { 
         ChatListView,
         ChatView,
         Market,
-        MarketDetailsView
+        MarketDetailsView,
+        HomeView,
+        DayDetails,
+        RecipieDetails
     },
     data() {
         return {
@@ -52,6 +58,24 @@ export default {
                     :class="['px-4 py-2 rounded', currentView === 'MarketDetailsView' ? 'bg-blue-600' : 'bg-gray-600 hover:bg-gray-500']"
                 >
                     Market Details
+                </button>
+                <button 
+                    @click="setView('HomeView')"
+                    :class="['px-4 py-2 rounded', currentView === 'HomeView' ? 'bg-blue-600' : 'bg-gray-600 hover:bg-gray-500']"
+                >
+                    Home View
+                </button>
+                <button 
+                    @click="setView('DayDetails')"
+                    :class="['px-4 py-2 rounded', currentView === 'DayDetails' ? 'bg-blue-600' : 'bg-gray-600 hover:bg-gray-500']"
+                >
+                    Day Details
+                </button>
+                <button 
+                    @click="setView('RecipieDetails')"
+                    :class="['px-4 py-2 rounded', currentView === 'RecipieDetails' ? 'bg-blue-600' : 'bg-gray-600 hover:bg-gray-500']"
+                >
+                    Recipie Details
                 </button>
             </div>
         </nav>
