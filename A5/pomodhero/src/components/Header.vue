@@ -16,11 +16,13 @@
     </div>
 </template>
 <script>
+
 export default {
     name: "Header",
     methods: {
         goBack() {
-            // move back in history
+            this.$router.go(-1);
+            console.log("Going back");
         }
     }
 };
