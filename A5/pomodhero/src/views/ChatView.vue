@@ -3,7 +3,7 @@
 		<div :class="$style.header">
 			<div :class="$style.leftheader">
 				<img :class="$style.leftheaderChild" alt="" src="../assets/images/back.svg" />
-				<b :class="$style.pomodhero">Chat</b>
+				<b :class="$style.pomodhero">Cetriolhero</b>
 			</div>
 			<div :class="$style.rightheader">
 				<img :class="$style.icon" alt="" src="../assets/images/logo.svg" />
