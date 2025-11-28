@@ -1,32 +1,61 @@
 <script>
-
 export default {
-    mounted() {
-        if (this.$router && this.$router.replace) {
-            // Replace current route with home on app start
-            this.$router.replace('/');
-        }
+  mounted() {
+    if (this.$router && this.$router.replace) {
+      this.$router.replace("/");
     }
+  },
 };
 </script>
 
 <template>
-    <div id="app" class="flex flex-col items-center w-full">
-        <!-- Testing Navbar -->
-        <nav class="w-full bg-gray-800 text-white p-4 mb-4">
-            <div class="flex gap-4 justify-center">
-                <router-link to="/" class="text-lg font-semibold">Home</router-link>
-                <router-link to="/market" class="text-lg font-semibold">Market</router-link>
-                <router-link to="/chat-list" class="px-4 py-2 rounded bg-gray-600 hover:bg-gray-500">Chat List</router-link>
-                <router-link to="/chat" class="px-4 py-2 rounded bg-gray-600 hover:bg-gray-500">Chat</router-link>
-                <router-link to="/market-details" class="px-4 py-2 rounded bg-gray-600 hover:bg-gray-500">Market Details</router-link>
-                <router-link to="/day-details" class="px-4 py-2 rounded bg-gray-600 hover:bg-gray-500">Day Details</router-link>
-                <router-link to="/recipie-details" class="px-4 py-2 rounded bg-gray-600 hover:bg-gray-500">Recipie Details</router-link>
-            </div>
-        </nav>
+  <div id="app" class="flex flex-col items-center w-full">
+    <!-- Testing Navbar -->
+    <nav class="w-full bg-gray-800 text-white p-4">
+      <div class="flex flex-wrap gap-2 justify-center">
+        <router-link
+          to="/"
+          class="text-sm sm:text-base px-2 py-1 sm:px-3 sm:py-1.5 rounded bg-gray-700 hover:bg-gray-600"
+          >Home</router-link
+        >
+        <router-link
+          to="/market"
+          class="text-sm sm:text-base px-2 py-1 sm:px-3 sm:py-1.5 rounded bg-gray-700 hover:bg-gray-600"
+          >Market</router-link
+        >
+        <router-link
+          to="/chat-list"
+          class="text-sm sm:text-base px-2 py-1 sm:px-3 sm:py-1.5 rounded bg-gray-600 hover:bg-gray-500"
+          >Chat List</router-link
+        >
+        <router-link
+          to="/chat"
+          class="text-sm sm:text-base px-2 py-1 sm:px-3 sm:py-1.5 rounded bg-gray-600 hover:bg-gray-500"
+          >Chat</router-link
+        >
+        <router-link
+          to="/market-details"
+          class="text-sm sm:text-base px-2 py-1 sm:px-3 sm:py-1.5 rounded bg-gray-600 hover:bg-gray-500"
+          >Market Details</router-link
+        >
+        <router-link
+          to="/day-details"
+          class="text-sm sm:text-base px-2 py-1 sm:px-3 sm:py-1.5 rounded bg-gray-600 hover:bg-gray-500"
+          >Day Details</router-link
+        >
+        <router-link
+          to="/recipie-details"
+          class="text-sm sm:text-base px-2 py-1 sm:px-3 sm:py-1.5 rounded bg-gray-600 hover:bg-gray-500"
+          >Recipie Details</router-link
+        >
+        <router-link
+          to="/login"
+          class="text-sm sm:text-base px-2 py-1 sm:px-3 sm:py-1.5 rounded bg-gray-600 hover:bg-gray-500"
+          >Login</router-link
+        >
+      </div>
+    </nav>
 
-        <!-- Router view: routed components will render here -->
-        <router-view />
-        
-    </div>
+    <router-view />
+  </div>
 </template>
