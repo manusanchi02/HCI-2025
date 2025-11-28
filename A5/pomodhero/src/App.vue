@@ -1,13 +1,15 @@
 <script>
 import ChatListView from './views/ChatListView.vue';
 import ChatView from './views/ChatView.vue';
-import Market from './views/Market.vue';
+import Market from './views/MarketView.vue';
+import MarketDetailsView from './views/MarketDetailsView.vue';
 
 export default {
     components: { 
         ChatListView,
         ChatView,
-        Market
+        Market,
+        MarketDetailsView
     },
     data() {
         return {
@@ -44,6 +46,12 @@ export default {
                     :class="['px-4 py-2 rounded', currentView === 'Market' ? 'bg-blue-600' : 'bg-gray-600 hover:bg-gray-500']"
                 >
                     Market
+                </button>
+                <button 
+                    @click="setView('MarketDetailsView')"
+                    :class="['px-4 py-2 rounded', currentView === 'MarketDetailsView' ? 'bg-blue-600' : 'bg-gray-600 hover:bg-gray-500']"
+                >
+                    Market Details
                 </button>
             </div>
         </nav>
