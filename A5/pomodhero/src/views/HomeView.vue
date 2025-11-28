@@ -199,33 +199,17 @@
                 </div>
             </div>
         </div>
-        <div :class="$style.tabbar">
-            <div :class="$style.home2">
-                <img :class="$style.icon2" alt="" />
-                <div :class="$style.lun">home</div>
-            </div>
-            <div :class="$style.bacheca">
-                <div :class="$style.icon3">
-                    <div :class="$style.iconChild" />
-                    <div :class="$style.iconItem" />
-                    <div :class="$style.iconInner" />
-                    <div :class="$style.rectangleDiv" />
-                </div>
-                <div :class="$style.lun">bacheca</div>
-            </div>
-            <div :class="$style.bacheca">
-                <img :class="$style.icon2" alt="" />
-                <div :class="$style.lun">chat</div>
-            </div>
-        </div>
+        <nav-bar></nav-bar>
     </div>
 </template>
 <script lang="ts">
 import Header from '../components/Header.vue';
+import NavBar from '../components/NavBar.vue';   
 
 export default {
     components: {
-        Header
+        Header,
+        NavBar
     }
 }
 </script>
@@ -415,6 +399,9 @@ export default {
     box-sizing: border-box;
     font-size: 25px;
     color: #003027;
+    /** rendi il contenuto scrollabile */
+    overflow-y: auto;
+    -webkit-overflow-scrolling: touch;
 }
 
 .homelistitem {
