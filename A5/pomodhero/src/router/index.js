@@ -7,6 +7,7 @@ import ChatListView from '../views/ChatListView.vue'
 import DayDetails from '../views/DayDetails.vue'
 import MarketDetailsView from '../views/MarketDetailsView.vue'
 import RecipieDetails from '../views/RecipieDetails.vue'
+import LoginView from '../views/LoginView.vue'
 
 const routes = [
   { path: '/', component: HomeView },
@@ -16,6 +17,7 @@ const routes = [
   { path: '/day-details', component: DayDetails},
   { path: '/market-details', component: MarketDetailsView},
   { path: '/recipie-details', component: RecipieDetails},
+  { path: '/login', component: LoginView},
 ]
 
 const router = createRouter({
