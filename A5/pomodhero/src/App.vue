@@ -1,4 +1,5 @@
 <script>
+
 export default {
     mounted() {
         if (this.$router && this.$router.replace) {
@@ -26,5 +27,6 @@ export default {
 
         <!-- Router view: routed components will render here -->
         <router-view />
+        
     </div>
 </template>

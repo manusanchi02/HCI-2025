@@ -1,6 +1,6 @@
 <template>
     <div :class="$style.home">
-        <Header></Header>
+        <Header title="Home"></Header>
         <div :class="$style.content">
             <div :class="$style.homelistitem">
                 <div :class="$style.dateframe">
@@ -399,7 +399,6 @@ export default {
     box-sizing: border-box;
     font-size: 25px;
     color: #003027;
-    /** rendi il contenuto scrollabile */
     overflow-y: auto;
     -webkit-overflow-scrolling: touch;
 }

@@ -2,7 +2,7 @@
     <div :class="$style.header">
         <div :class="$style.leftheader">
             <img :class="$style.leftheaderChild" @click="goBack" src="../assets/images/back.svg" alt="" />
-            <b :class="$style.pomodhero">Pomodhero</b>
+            <b :class="$style.pomodhero">{{ title }}</b>
         </div>
         <div :class="$style.rightheader">
             <div :class="$style.icon">
@@ -19,6 +19,12 @@
 
 export default {
     name: "Header",
+    props: {
+        title: {
+            type: String,
+            default: 'Pomodhero'
+        }
+    },
     methods: {
         goBack() {
             this.$router.go(-1);
