@@ -1,6 +1,7 @@
 <script>
 import Header from "../components/Header.vue";
 import InputChip from "../components/InputChip.vue";
+import ProfileImageUploader from "../components/ProfileImageUploader.vue";
 import { getData, setData, isUserLoggedIn } from "../utils/storage";
 
 export default {
@@ -9,12 +10,14 @@ export default {
       username: "",
       email: "",
       password: "",
+      profilePicture: "",
       isLogin: false,
     };
   },
   components: {
     Header,
     InputChip,
+    ProfileImageUploader,
   },
   mounted() {
     if (isUserLoggedIn()) {
@@ -25,6 +28,7 @@ export default {
     const data = getData();
     if (data && data.user && data.user.username) {
       this.isLogin = true;
+      this.profilePicture = data.user.profilePicture || "";
     } else {
       this.isLogin = false;
     }
@@ -71,7 +75,7 @@ export default {
           username: this.username,
           email: this.email,
           password: this.password,
-          profilePicture: "",
+          profilePicture: this.profilePicture,
         };
         
         setData(data);
@@ -86,11 +90,9 @@ export default {
   <div :class="$style.logInSignIn">
     <Header :title="isLogin ? 'Login' : 'Sign In'" />
     <div :class="$style.userImage">
-      <img
-        :class="$style.userImageChild"
-        alt=""
-        src="../assets/images/user.svg"
-      />
+      <ProfileImageUploader 
+        v-if="!isLogin"
+        v-model="profilePicture" />
       <InputChip
         v-model="username"
         type="text"
