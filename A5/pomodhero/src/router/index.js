@@ -12,7 +12,7 @@ import LoginView from '../views/LoginView.vue'
 const routes = [
   { path: '/', component: HomeView },
   { path: '/market', component: MarketView},
-  { path: '/chat', component: ChatView},
+  { path: '/chat/:username', name: 'ChatView', component: ChatView, props: true},
   { path: '/chat-list', component: ChatListView},
   { path: '/day-details', component: DayDetails},
   { path: '/market-details', component: MarketDetailsView},

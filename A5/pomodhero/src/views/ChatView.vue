@@ -1,14 +1,6 @@
 <template>
 	<div :class="$style.openedchat">
-		<div :class="$style.header">
-			<div :class="$style.leftheader">
-				<img :class="$style.leftheaderChild" alt="" src="../assets/images/back.svg" />
-				<b :class="$style.pomodhero">Cetriolhero</b>
-			</div>
-			<div :class="$style.rightheader">
-				<img :class="$style.icon" alt="" src="../assets/images/logo.svg" />
-			</div>
-		</div>
+		<Header :title=username></Header>
 		<div :class="$style.content">
 			<div :class="$style.chat">
 				<div :class="$style.messageother">
@@ -34,11 +26,32 @@
 				<div :class="$style.input">
 					<div :class="$style.typeAMessage">Type a message...</div>
 				</div>
-				<img :class="$style.categoriesIconButton" alt="" src="../assets/images/send-msg.svg"/>
+				<img :class="$style.categoriesIconButton" alt="" src="../assets/images/send-msg.svg" />
 			</div>
 		</div>
 	</div>
 </template>
+<script lang="ts">
+import Header from '../components/Header.vue';
+
+export default {
+	components: {
+		Header
+	},
+	name: "ChatView",
+    props: {
+        username: {
+            type: String,
+            //default: 'Cetriolhero'
+        }
+    },
+    methods: {
+        /*goBack() {
+            this.$router.go(-1);
+        }*/
+    }
+}
+</script>
 <style module>
 .openedchat {
 	width: 100%;
