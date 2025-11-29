@@ -19,21 +19,6 @@ export default {
           >Home</router-link
         >
         <router-link
-          to="/market"
-          class="text-sm sm:text-base px-2 py-1 sm:px-3 sm:py-1.5 rounded bg-gray-700 hover:bg-gray-600"
-          >Market</router-link
-        >
-        <router-link
-          to="/chat-list"
-          class="text-sm sm:text-base px-2 py-1 sm:px-3 sm:py-1.5 rounded bg-gray-600 hover:bg-gray-500"
-          >Chat List</router-link
-        >
-        <router-link
-          to="/market-details"
-          class="text-sm sm:text-base px-2 py-1 sm:px-3 sm:py-1.5 rounded bg-gray-600 hover:bg-gray-500"
-          >Market Details</router-link
-        >
-        <router-link
           to="/day-details"
           class="text-sm sm:text-base px-2 py-1 sm:px-3 sm:py-1.5 rounded bg-gray-600 hover:bg-gray-500"
           >Day Details</router-link
