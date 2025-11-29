@@ -1,15 +1,14 @@
 // Service Worker for PWA
 const CACHE_NAME = 'pomodhero-v1';
-const BASE_PATH = '/HCI-2025';
-const urlsToCache = [
-  `${BASE_PATH}/`,
-  `${BASE_PATH}/index.html`
-];
 
 self.addEventListener('install', (event) => {
   event.waitUntil(
-    caches.open(CACHE_NAME)
-      .then((cache) => cache.addAll(urlsToCache))
+    caches.open(CACHE_NAME).then((cache) => {
+      return cache.addAll([
+        './',
+        './index.html'
+      ]);
+    })
   );
 });
 
