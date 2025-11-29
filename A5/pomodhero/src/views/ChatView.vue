@@ -2,54 +2,110 @@
 	<div :class="$style.openedchat">
 		<Header :title=username></Header>
 		<div :class="$style.content">
-			<div :class="$style.chat">
-				<div :class="$style.messageother">
-					<div :class="$style.box">
-						<div :class="$style.ciaoDovePossiamo">Ciao dove possiamo vederci?</div>
-						<div :class="$style.div">12:00</div>
-					</div>
-				</div>
-				<div :class="$style.messagemine">
-					<div :class="$style.box2">
-						<div :class="$style.vediamociInVia">Vediamoci in via del pinzimonio</div>
-						<div :class="$style.div2">12:03</div>
-					</div>
-				</div>
-				<div :class="$style.messageother">
-					<div :class="$style.box">
-						<div :class="$style.ciaoDovePossiamo">Ok!</div>
-						<div :class="$style.div">12:05</div>
-					</div>
+			<div :class="$style.chat" ref="chatContainer">
+				<div :class="$style.messagesWrapper">
+					<template v-for="(msg, index) in allMessages" :key="index">
+						<MessageReceiver v-if="msg.type === 'received'" :message="msg.text" :time="msg.time" />
+						<MessageSender v-else :message="msg.text" :time="msg.time" />
+					</template>
 				</div>
 			</div>
 			<div :class="$style.inputParent">
 				<div :class="$style.input">
-					<div :class="$style.typeAMessage">Type a message...</div>
+					<input type="text" placeholder="Type a message..." :class="$style.typeAMessage" v-model="message" @keyup.enter="sendMessage" />
 				</div>
-				<img :class="$style.categoriesIconButton" alt="" src="../assets/images/send-msg.svg" />
+				<div @click="sendMessage" style="cursor: pointer;">
+					<img :class="$style.categoriesIconButton" alt="" src="../assets/images/send-msg.svg" />
+				</div>
 			</div>
 		</div>
 	</div>
 </template>
 <script lang="ts">
 import Header from '../components/Header.vue';
+import MessageReceiver from '../components/MessageReceiver.vue';
+import MessageSender from '../components/MessageSender.vue';
 
 export default {
 	components: {
-		Header
+		Header,
+		MessageReceiver,
+		MessageSender
 	},
 	name: "ChatView",
-    props: {
-        username: {
-            type: String,
-            //default: 'Cetriolhero'
-        }
-    },
-    methods: {
-        /*goBack() {
-            this.$router.go(-1);
-        }*/
-    }
+	props: {
+		username: {
+			type: String,
+			default: 'Cetriolhero'
+		}
+	},
+	data() {
+		return {
+			message: '',
+			allMessages: [],
+			okResponseSent: false
+		}
+	},
+	computed: {
+		initialMessageTime() {
+			const now = new Date();
+			const tenMinutesAgo = new Date(now.getTime() - 10 * 60 * 1000);
+			return tenMinutesAgo.getHours().toString().padStart(2, '0') + ':' + tenMinutesAgo.getMinutes().toString().padStart(2, '0');
+		}
+	},
+	mounted() {
+		// Add initial message when component mounts
+		this.allMessages.push({
+			type: 'received',
+			text: 'Ciao dove possiamo vederci?',
+			time: this.initialMessageTime
+		});
+		this.$nextTick(() => {
+			this.scrollToBottom();
+		});
+	},
+	methods: {
+		scrollToBottom() {
+			if (this.$refs.chatContainer) {
+				this.$refs.chatContainer.scrollTop = this.$refs.chatContainer.scrollHeight;
+			}
+		},
+		sendMessage() {
+			if (this.message.trim() === '') return;
+			
+			const now = new Date();
+			const time = now.getHours().toString().padStart(2, '0') + ':' + now.getMinutes().toString().padStart(2, '0');
+			
+			this.allMessages.push({
+				type: 'sent',
+				text: this.message,
+				time: time
+			});
+			
+			this.message = '';
+			
+			this.$nextTick(() => {
+				this.scrollToBottom();
+			});
+			
+			// Show OK response only after the first sent message
+			if (!this.okResponseSent) {
+				this.okResponseSent = true;
+				setTimeout(() => {
+					const responseTime = new Date();
+					const okTime = responseTime.getHours().toString().padStart(2, '0') + ':' + responseTime.getMinutes().toString().padStart(2, '0');
+					this.allMessages.push({
+						type: 'received',
+						text: 'Ok!',
+						time: okTime
+					});
+					this.$nextTick(() => {
+						this.scrollToBottom();
+					});
+				}, 5000);
+			}
+		}
+	}
 }
 </script>
 <style module>
@@ -229,7 +285,7 @@ export default {
 
 .content {
 	align-self: stretch;
-	height: 746px;
+	flex: 1;
 	overflow: hidden;
 	display: flex;
 	flex-direction: column;
@@ -241,84 +297,21 @@ export default {
 
 .chat {
 	align-self: stretch;
-	overflow: hidden;
+	flex: 1;
+	overflow-y: auto;
+	display: flex;
+	flex-direction: column;
+	min-height: 0;
+}
+
+.messagesWrapper {
 	display: flex;
 	flex-direction: column;
 	align-items: flex-start;
 	padding: 10px 10px 18px;
 	gap: 26px;
-}
-
-.messageother {
-	align-self: stretch;
-	overflow: hidden;
-	display: flex;
-	align-items: flex-start;
-}
-
-.box {
-	border-radius: 25px 25px 25px 4px;
-	background-color: #7bb6a6;
-	overflow: hidden;
-	display: flex;
-	flex-direction: column;
-	align-items: flex-start;
-	padding: 16px 20px;
-	gap: 4px;
-}
-
-.ciaoDovePossiamo {
-	position: relative;
-	letter-spacing: 1px;
-	line-height: 20px;
-}
-
-.div {
-	position: relative;
-	font-size: 16px;
-	letter-spacing: 1px;
-	line-height: 20px;
-	color: #0f634d;
-}
-
-.messagemine {
-	align-self: stretch;
-	overflow: hidden;
-	display: flex;
-	align-items: flex-start;
-	justify-content: flex-end;
-	text-align: right;
-	color: #191c1b;
-}
-
-.box2 {
-	border-radius: 25px 25px 4px 25px;
-	background-color: #d8dad8;
-	overflow: hidden;
-	display: flex;
-	flex-direction: column;
-	align-items: flex-end;
-	padding: 16px 20px;
-	gap: 4px;
-}
-
-.vediamociInVia {
-	width: 247px;
-	position: relative;
-	letter-spacing: 1px;
-	line-height: 20px;
-	display: flex;
-	align-items: center;
-	justify-content: flex-end;
-}
-
-.div2 {
-	position: relative;
-	font-size: 16px;
-	letter-spacing: 1px;
-	line-height: 20px;
-	color: #747474;
-	text-align: left;
+	margin-top: auto;
+	min-height: min-content;
 }
 
 .inputParent {
@@ -347,8 +340,15 @@ export default {
 }
 
 .typeAMessage {
-	position: relative;
-	line-height: 24px;
+    position: relative;
+    line-height: 24px;
+    width: 100%;
+    border: none;
+    outline: none;
+    background: transparent;
+    font-family: 'DM Sans';
+    font-size: 16px;
+    color: #72777a;
 }
 
 .categoriesIconButton {
