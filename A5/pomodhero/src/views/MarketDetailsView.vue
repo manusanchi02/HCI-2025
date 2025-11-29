@@ -12,8 +12,10 @@
                 <b :class="$style.pomodhero">{{ dateRange }}</b>
             </div>
         </div>
-        <div :class="$style.floatingButton">
-            <img :class="$style.confirmIcon" alt="" />
+        <div :class="$style.floatingButton" @click="openChat">
+            <div :class="$style.confirmIcon">
+                <img :class="$style.iconImg" alt="" src="../assets/images/contact.svg" />
+            </div>
         </div>
         <nav-bar></nav-bar>
     </div>
@@ -54,6 +56,16 @@ export default {
         }
     },
     methods: {
+        openChat() {
+            if (this.username) {
+                this.$router.push({
+                    name: 'ChatView',
+                    params: {
+                        username: this.username
+                    }
+                });
+            }
+        }
     },
 }
 </script>
@@ -168,11 +180,21 @@ export default {
     justify-content: flex-end;
     padding: 20px;
     box-sizing: border-box;
+    cursor: pointer;
 }
 
 .confirmIcon {
     height: 60px;
     width: 60px;
     border-radius: 50px;
+    background-color: #CD471F;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.iconImg {
+    height: 30px;
+    width: 30px;
 }
 </style>
