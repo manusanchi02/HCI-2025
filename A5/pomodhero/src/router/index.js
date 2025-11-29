@@ -15,7 +15,7 @@ const routes = [
   { path: '/chat/:username', name: 'ChatView', component: ChatView, props: true},
   { path: '/chat-list', component: ChatListView},
   { path: '/day-details', component: DayDetails},
-  { path: '/market-details', component: MarketDetailsView},
+  { path: '/market-details', name: 'MarketDetailsView', component: MarketDetailsView},
   { path: '/recipie-details', component: RecipieDetails},
   { path: '/login', component: LoginView},
 ]

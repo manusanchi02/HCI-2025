@@ -1,5 +1,5 @@
 <template>
-    <div :class="$style.item">
+    <div :class="$style.item" @click="goToDetails">
         <img :class="$style.figureIcon" :src="image" alt="" />
         <div :class="$style.details">
             <div :class="$style.nameanduser">
@@ -48,11 +48,30 @@ export default {
         expiryDate: {
             type: String,
             required: true
+        },
+        uploadDate: {
+            type: String,
+            default: ''
         }
     },
     computed: {
         userInitial() {
             return this.username.charAt(0).toUpperCase();
+        }
+    },
+    methods: {
+        goToDetails() {
+            this.$router.push({
+                name: 'MarketDetailsView',
+                query: {
+                    image: this.image,
+                    title: this.title,
+                    username: this.username,
+                    price: this.price,
+                    expiryDate: this.expiryDate,
+                    uploadDate: this.uploadDate
+                }
+            });
         }
     }
 }
