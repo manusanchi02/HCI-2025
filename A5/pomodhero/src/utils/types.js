@@ -22,8 +22,8 @@
 /**
  * @typedef {Object} Day
  * @property {string} name - Nome del giorno (es. "Monday", "Tuesday")
- * @property {Recipe[]} lunch - Ricette per il pranzo
- * @property {Recipe[]} dinner - Ricette per la cena
+ * @property {number[]} lunch - Array di ID delle ricette per il pranzo
+ * @property {number[]} dinner - Array di ID delle ricette per la cena
  */
 
 /**
