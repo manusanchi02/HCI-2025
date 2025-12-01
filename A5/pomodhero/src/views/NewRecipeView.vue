@@ -229,7 +229,7 @@ export default {
 <style module>
 .newrecipe {
   width: 100%;
-  height: 933px;
+  height: 100vh;
   position: relative;
   background-color: #f2f4f2;
   box-sizing: border-box;
@@ -320,13 +320,14 @@ export default {
 }
 .content {
   align-self: stretch;
-  height: 646px;
+  flex: 1;
   background-color: #f2f4f2;
-  overflow: hidden;
+  overflow-y: auto;
   display: flex;
   flex-direction: column;
   align-items: center;
   padding: 20px;
+  padding-bottom: 80px;
   box-sizing: border-box;
   gap: 10px;
   font-size: 20px;
@@ -335,6 +336,7 @@ export default {
 .recipeTitleInput {
   align-self: stretch;
   overflow: hidden;
+  flex-shrink: 0;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -376,12 +378,15 @@ export default {
   padding: 0px 5px;
   box-sizing: border-box;
   gap: 10px;
+  position: sticky;
+  top: 0;
+  background-color: #f2f4f2;
+  z-index: 1;
 }
 .ingredientsLabel {
   align-self: stretch;
-  width: 194px;
+  width: 60%;
   overflow: hidden;
-  flex-shrink: 0;
   display: flex;
   align-items: center;
   padding: 10px;
@@ -394,19 +399,17 @@ export default {
 }
 .quantityLabel {
   align-self: stretch;
-  width: 90px;
+  width: 40%;
   overflow: hidden;
   flex-shrink: 0;
   display: flex;
   align-items: center;
-  justify-content: flex-end;
+  justify-content: flex-start;
   padding: 10px;
   box-sizing: border-box;
 }
 .recipeIngredientInput {
   align-self: stretch;
-  height: 68px;
-  overflow: hidden;
   flex-shrink: 0;
   display: flex;
   align-items: center;
@@ -420,21 +423,19 @@ export default {
 }
 .inputChip2 {
   align-self: stretch;
-  width: 191px;
+  flex: 1;
   padding: 10px;
   border-radius: 8px;
   border: 1px solid #cac4d0;
   box-sizing: border-box;
   overflow: hidden;
-  flex-shrink: 0;
   display: flex;
   align-items: center;
 }
 .ingredientQta {
   height: 48px;
-  width: 147px;
-  overflow: hidden;
   flex-shrink: 0;
+  overflow: hidden;
   display: flex;
   align-items: center;
   gap: 5px;
