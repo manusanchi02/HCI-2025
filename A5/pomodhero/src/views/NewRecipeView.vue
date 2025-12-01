@@ -1,12 +1,15 @@
 <script>
 import Header from "../components/Header.vue";
 import InputChip from "../components/InputChip.vue";
+import FloatingButton from "../components/FloatingButton.vue";
 import { getData, setData } from "../utils/storage";
+import checkIcon from "../assets/images/check.svg";
 
 export default {
   components: {
     Header,
     InputChip,
+    FloatingButton,
   },
   props: {
     day: {
@@ -46,6 +49,7 @@ export default {
         { name: "", quantity: "", unit: "gr" },
       ],
       unitOptions: ["gr", "kg", "ml", "l", "pz"],
+      checkIcon,
     };
   },
   methods: {
@@ -216,11 +220,10 @@ export default {
         </div>
       </div>
     </div>
-    <div :class="$style.floatingButton">
-      <div :class="$style.roundButton" @click="saveRecipe">
-        <img alt="" src="../assets/images/check.svg"/>
-      </div>
-    </div>
+    <FloatingButton 
+      :icon="checkIcon" 
+      :on-click="saveRecipe" 
+    />
   </div>
 </template>
 <style module>
@@ -546,19 +549,7 @@ export default {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-}
-.floatingButton {
-  align-self: stretch;
-  background-color: #f2f4f2;
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-  padding: 20px;
-}
-.confirmIcon {
-  height: 60px;
-  width: 60px;
-  border-radius: 50px;
+  cursor: pointer;
 }
 .gestureBar {
   align-self: stretch;
