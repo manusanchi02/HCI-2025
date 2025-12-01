@@ -36,6 +36,11 @@ export default {
           >Login</router-link
         >
         <router-link
+          to="/unexpected/0"
+          class="text-sm sm:text-base px-2 py-1 sm:px-3 sm:py-1.5 rounded bg-gray-600 hover:bg-gray-500"
+          >Imprevisto</router-link
+        >
+        <router-link
           to="/new-recipe/monday/lunch/manual"
           class="text-sm sm:text-base px-2 py-1 sm:px-3 sm:py-1.5 rounded bg-gray-600 hover:bg-gray-500"
           >New Recipe (Manual)</router-link

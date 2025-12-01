@@ -9,6 +9,7 @@ import MarketDetailsView from '../views/MarketDetailsView.vue'
 import RecipieDetails from '../views/RecipieDetails.vue'
 import LoginView from '../views/LoginView.vue'
 import NewRecipeView from '../views/NewRecipeView.vue'
+import UnexpectedView from '../views/UnexpectedView.vue'
 
 const routes = [
   { path: '/', component: HomeView },
@@ -19,7 +20,8 @@ const routes = [
   { path: '/market-details', name: 'MarketDetailsView', component: MarketDetailsView},
   { path: '/recipie-details', component: RecipieDetails},
   { path: '/login', component: LoginView},
-  { path: '/new-recipe/:day/:meal/:method', name: 'NewRecipe', component: NewRecipeView, props: true }
+  { path: '/new-recipe/:day/:meal/:method', name: 'NewRecipe', component: NewRecipeView, props: true },
+  { path: '/unexpected/:recipe' , name: 'UnexpectedView', component: UnexpectedView, props: true }
 ]
 
 const router = createRouter({
