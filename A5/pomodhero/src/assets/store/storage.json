@@ -45,11 +45,15 @@
   "recipes": [
     {
       "id": 0,
-      "title": "",
+      "title": "Pasta al pesto",
       "ingredients": [
         {
-          "name": "",
-          "quantity": 0.00
+          "name": "Pasta",
+          "quantity": "100 gr"
+        },
+        {
+          "name": "Pesto",
+          "quantity": "30 gr"
         }
       ]
     }

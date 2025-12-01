@@ -4,6 +4,7 @@ import InputChip from "../components/InputChip.vue";
 import FloatingButton from "../components/FloatingButton.vue";
 import { getData, setData } from "../utils/storage";
 import checkIcon from "../assets/images/check.svg";
+import soundWavesGif from "../assets/images/sound-waves.gif";
 
 export default {
   components: {
@@ -50,7 +51,15 @@ export default {
       ],
       unitOptions: ["gr", "kg", "ml", "l", "pz"],
       checkIcon,
+      soundWavesGif,
+      isRecording: false,
+      isClosing: false,
     };
+  },
+  mounted() {
+    if (this.method === "audio") {
+      this.isRecording = true;
+    }
   },
   methods: {
     addIngredient() {
@@ -59,6 +68,37 @@ export default {
     removeIngredient(index) {
       if (this.ingredients.length > 1) {
         this.ingredients.splice(index, 1);
+      }
+    },
+    stopRecording() {
+      this.isClosing = true;
+      setTimeout(() => {
+        this.isRecording = false;
+        this.isClosing = false;
+        this.loadRecipeFromStorage();
+      }, 300);
+    },
+    loadRecipeFromStorage() {
+      const data = getData();
+      if (data.recipes && data.recipes.length > 0) {
+        const recipe = data.recipes[0];
+        this.title = recipe.title || "";
+        
+        // Parse ingredients from recipe
+        if (recipe.ingredients && recipe.ingredients.length > 0) {
+          this.ingredients = recipe.ingredients.map((ing) => {
+            // Parse "quantity unit" format, e.g., "100 gr"
+            const parts = ing.quantity.split(" ");
+            const quantity = parts[0] || "";
+            const unit = parts[1] || "gr";
+            
+            return {
+              name: ing.name || "",
+              quantity: quantity,
+              unit: unit,
+            };
+          });
+        }
       }
     },
     saveRecipe() {
@@ -224,6 +264,15 @@ export default {
       :icon="checkIcon" 
       :on-click="saveRecipe" 
     />
+    <!-- Audio Recording Modal -->
+    <div v-if="isRecording" :class="$style.modalOverlay" @click="stopRecording">
+      <div :class="[$style.audioModal, isClosing ? $style.slideDown : '']" @click.stop>
+        <img :src="soundWavesGif" alt="Recording..." :class="$style.soundWaves" />
+        <div :class="$style.stopButton" @click="stopRecording">
+          <img :src="checkIcon" alt="Stop" />
+        </div>
+      </div>
+    </div>
   </div>
 </template>
 <style module>
@@ -566,5 +615,71 @@ export default {
   background-color: #1d1b20;
   width: 108px;
   height: 4px;
+}
+.modalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  z-index: 1000;
+}
+.audioModal {
+  background-color: #ffffff;
+  border-radius: 20px 20px 0 0;
+  padding: 30px 20px;
+  width: 100%;
+  max-width: 500px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  animation: slideUp 0.3s ease-out;
+}
+@keyframes slideUp {
+  from {
+    transform: translateY(100%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+@keyframes slideDown {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(100%);
+  }
+}
+.slideDown {
+  animation: slideDown 0.3s ease-out forwards;
+}
+.soundWaves {
+  width: 200px;
+  height: 200px;
+  object-fit: contain;
+}
+.stopButton {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background-color: #cd471f;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: opacity 0.2s;
+}
+.stopButton:active {
+  opacity: 0.8;
+}
+.stopButton img {
+  width: 24px;
+  height: 24px;
 }
 </style>
