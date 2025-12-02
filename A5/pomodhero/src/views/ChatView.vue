@@ -43,10 +43,13 @@ export default {
 		return {
 			message: '',
 			allMessages: [],
-			okResponseSent: false
+			responseAlreadySent: false
 		}
 	},
 	computed: {
+		isFromMarket() {
+			return this.$route.query.fromMarket === 'true';
+		},
 		initialMessageTime() {
 			const now = new Date();
 			const tenMinutesAgo = new Date(now.getTime() - 10 * 60 * 1000);
@@ -54,15 +57,17 @@ export default {
 		}
 	},
 	mounted() {
-		// Add initial message when component mounts
-		this.allMessages.push({
-			type: 'received',
-			text: 'Ciao dove possiamo vederci?',
-			time: this.initialMessageTime
-		});
-		this.$nextTick(() => {
-			this.scrollToBottom();
-		});
+		// Add initial message only when coming from navbar (not from market)
+		if (!this.isFromMarket) {
+			this.allMessages.push({
+				type: 'received',
+				text: 'Ciao dove possiamo vederci?',
+				time: this.initialMessageTime
+			});
+			this.$nextTick(() => {
+				this.scrollToBottom();
+			});
+		}
 	},
 	methods: {
 		scrollToBottom() {
@@ -88,16 +93,21 @@ export default {
 				this.scrollToBottom();
 			});
 			
-			// Show OK response only after the first sent message
-			if (!this.okResponseSent) {
-				this.okResponseSent = true;
+			// Handle automatic response based on access mode
+			if (!this.responseAlreadySent) {
+				this.responseAlreadySent = true;
 				setTimeout(() => {
 					const responseTime = new Date();
-					const okTime = responseTime.getHours().toString().padStart(2, '0') + ':' + responseTime.getMinutes().toString().padStart(2, '0');
+					const responseTimeStr = responseTime.getHours().toString().padStart(2, '0') + ':' + responseTime.getMinutes().toString().padStart(2, '0');
+					
+					const responseText = this.isFromMarket 
+						? 'Vediamoci in piazza del pinzimonio'
+						: 'Ok!';
+					
 					this.allMessages.push({
 						type: 'received',
-						text: 'Ok!',
-						time: okTime
+						text: responseText,
+						time: responseTimeStr
 					});
 					this.$nextTick(() => {
 						this.scrollToBottom();
