@@ -2,20 +2,18 @@
     <div :class="$style.marketdetails">
         <Header title="Dettaglio prodotto"></Header>
         <div :class="$style.content">
-            <b :class="$style.latte">{{ title }}</b>
-            <div :class="$style.immagine">
-                <img :class="$style.image1Icon" :src="image" alt="" />
+            <div :class="$style.scrollableContent">
+                <b :class="$style.latte">{{ title }}</b>
+                <div :class="$style.immagine">
+                    <img :class="$style.image1Icon" :src="image" alt="" />
+                </div>
+                <div :class="$style.dettagliProdotto">
+                    <b :class="$style.b">{{ price }}€</b>
+                    <b :class="$style.cetriolhero">{{ username }}</b>
+                    <b :class="$style.pomodhero">{{ dateRange }}</b>
+                </div>
             </div>
-            <div :class="$style.dettagliProdotto">
-                <b :class="$style.b">{{ price }}€</b>
-                <b :class="$style.cetriolhero">{{ username }}</b>
-                <b :class="$style.pomodhero">{{ dateRange }}</b>
-            </div>
-        </div>
-        <div :class="$style.floatingButton" @click="openChat">
-            <div :class="$style.confirmIcon">
-                <img :class="$style.iconImg" alt="" src="../assets/images/contact.svg" />
-            </div>
+            <FloatingButton :icon="contactIcon" :onClick="openChat" />
         </div>
         <nav-bar></nav-bar>
     </div>
@@ -23,11 +21,19 @@
 <script lang="ts">
 import Header from '../components/Header.vue';
 import NavBar from '../components/NavBar.vue';
+import FloatingButton from '../components/FloatingButton.vue';
+import contactIcon from '../assets/images/contact.svg';
 
 export default {
     components: {
         Header,
         NavBar,
+        FloatingButton,
+    },
+    data() {
+        return {
+            contactIcon: contactIcon
+        };
     },
     computed: {
         image() {
@@ -62,6 +68,9 @@ export default {
                     name: 'ChatView',
                     params: {
                         username: this.username
+                    },
+                    query: {
+                        fromMarket: 'true'
                     }
                 });
             }
@@ -88,17 +97,27 @@ export default {
 
 .content {
     align-self: stretch;
-    height: 576px;
+    flex: 1;
     overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    font-size: 45px;
+    color: #00483c;
+}
+
+.scrollableContent {
+    align-self: stretch;
+    flex: 1;
+    overflow-y: auto;
     display: flex;
     flex-direction: column;
     align-items: center;
     padding: 0px 18px;
     box-sizing: border-box;
     gap: 5px;
-    text-align: center;
-    font-size: 45px;
-    color: #00483c;
+    min-height: 0;
 }
 
 .latte {
@@ -171,30 +190,5 @@ export default {
 .pomodhero {
     position: relative;
     line-height: 28px;
-}
-
-.floatingButton {
-    width: 412px;
-    display: flex;
-    align-items: center;
-    justify-content: flex-end;
-    padding: 20px;
-    box-sizing: border-box;
-    cursor: pointer;
-}
-
-.confirmIcon {
-    height: 60px;
-    width: 60px;
-    border-radius: 50px;
-    background-color: #CD471F;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.iconImg {
-    height: 30px;
-    width: 30px;
 }
 </style>
