@@ -4,7 +4,8 @@
         <div :class="$style.content">
             <div :class="$style.itemParent">
                 <MarketItem v-for="(item, index) in marketItems" :key="index" :image="item.image" :title="item.name"
-                    :username="item.user" :price="item.price" :expiryDate="item.expirationDate" :uploadDate="item.uploadDate" />
+                    :username="item.user" :price="item.price" :expiryDate="item.expirationDate"
+                    :uploadDate="item.uploadDate" />
             </div>
         </div>
         <nav-bar></nav-bar>
