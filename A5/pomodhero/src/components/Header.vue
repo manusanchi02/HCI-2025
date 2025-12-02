@@ -1,7 +1,8 @@
 <template>
     <div :class="$style.header">
         <div :class="$style.leftheader">
-            <img :class="$style.leftheaderChild" @click="goBack" src="../assets/images/back.svg" alt="" />
+            <img v-if="enableBack" :class="$style.leftheaderChild" @click="goBack" src="../assets/images/back.svg" alt="" />
+            <div v-if="!enableBack" :class="$style.leftheaderChild"></div>
             <b :class="$style.pomodhero">{{ title }}</b>
         </div>
         <div :class="$style.rightheader">
@@ -23,6 +24,10 @@ export default {
         title: {
             type: String,
             default: 'Pomodhero'
+        },
+        enableBack: {
+            type: Boolean,
+            default: true
         }
     },
     methods: {

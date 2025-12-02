@@ -1,6 +1,6 @@
 <template>
     <div :class="$style.home">
-        <Header title="Home"></Header>
+        <Header title="Home" :enable-back="false" ></Header>
         <div :class="$style.content">
             <div :class="$style.homelistitem">
                 <div :class="$style.dateframe">
