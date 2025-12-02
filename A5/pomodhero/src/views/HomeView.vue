@@ -42,9 +42,8 @@ export default {
         generateWeekData() {
             const today = new Date();
             const weekDays = [];
-            const dayNames = ['Dom', 'Lun', 'Mar', 'Mer', 'Gio', 'Ven', 'Sab'];
-            const monthNames = ['Gen', 'Feb', 'Mar', 'Apr', 'Mag', 'Giu', 'Lug', 'Ago', 'Set', 'Ott', 'Nov', 'Dic'];
             const dayNamesEn = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+            const monthNamesEn = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
             const storageData = StorageUtils.getData();
 
             // Get start of week (Monday)
@@ -76,9 +75,9 @@ export default {
                 }, 0);
 
                 weekDays.push({
-                    weekDay: dayNames[dayOfWeek],
+                    weekDay: dayNamesEn[dayOfWeek],
                     dayNumber: date.getDate().toString(),
-                    month: monthNames[date.getMonth()],
+                    month: monthNamesEn[date.getMonth()],
                     lunchRecipesCount: lunchRecipes.length,
                     dinnerRecipesCount: dinnerRecipes.length,
                     lunchIngredientsCount,

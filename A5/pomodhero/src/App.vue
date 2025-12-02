@@ -16,11 +16,6 @@ export default {
     <nav class="w-full bg-gray-800 text-white p-4">
       <div class="flex flex-wrap gap-2 justify-center">
         <router-link
-          to="/day-details"
-          class="text-sm sm:text-base px-2 py-1 sm:px-3 sm:py-1.5 rounded bg-gray-600 hover:bg-gray-500"
-          >Day Details</router-link
-        >
-        <router-link
           to="/recipie-details"
           class="text-sm sm:text-base px-2 py-1 sm:px-3 sm:py-1.5 rounded bg-gray-600 hover:bg-gray-500"
           >Recipie Details</router-link
