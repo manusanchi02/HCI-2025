@@ -1,6 +1,6 @@
 <template>
     <div :class="$style.marketdetails">
-        <Header title="Dettaglio prodotto"></Header>
+        <Header title="Dettagli"></Header>
         <div :class="$style.content">
             <div :class="$style.scrollableContent">
                 <b :class="$style.latte">{{ title }}</b>
