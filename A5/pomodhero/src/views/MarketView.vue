@@ -1,6 +1,6 @@
 <template>
     <div :class="$style.bacheca">
-        <Header title="Bacheca"></Header>
+        <Header title="Bacheca" :enable-back="false"></Header>
         <div :class="$style.content">
             <div :class="$style.itemParent">
                 <MarketItem v-for="(item, index) in marketItems" :key="index" :image="item.image" :title="item.name"

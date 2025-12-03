@@ -1,6 +1,6 @@
 <template>
     <div :class="$style.profileView">
-        <Header title="Profilo Utente" />
+        <Header title="Profilo Utente" :enable-back="false" />
         <div :class="$style.userInfo">
             <div :class="$style.profileImageContainer">
                 <img v-if="profilePicture" :src="profilePicture" :class="$style.profileImage" alt="Profile Picture" />
@@ -19,17 +19,12 @@
         </div>
         <FloatingButton :icon="logoutIcon" :onClick="handleLogout" />
         <NavBar></NavBar>
-        
-        <ConfirmDialog
-            v-model:show="showLogoutDialog"
-            title="Conferma logout"
-            message="Sei sicuro di voler effettuare il logout?"
-            confirm-text="Logout"
-            cancel-text="Annulla"
-            @confirm="confirmLogout"
-        />
+
+        <ConfirmDialog v-model:show="showLogoutDialog" title="Conferma logout"
+            message="Sei sicuro di voler effettuare il logout?" confirm-text="Logout" cancel-text="Annulla"
+            @confirm="confirmLogout" />
     </div>
-    
+
 </template>
 <script lang="ts">
 import Header from "../components/Header.vue";

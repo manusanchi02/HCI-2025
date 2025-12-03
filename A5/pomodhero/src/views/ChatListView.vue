@@ -1,6 +1,6 @@
 <template>
 	<div :class="$style.chatList">
-		<Header title="Chat"></Header>
+		<Header title="Chat" :enable-back="false"></Header>
 		<div :class="$style.content">
 			<div :class="$style.frameParent" @click="openChat('Cetriolhero')">
 				<div :class="$style.cWrapper">
