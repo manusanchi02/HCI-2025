@@ -18,11 +18,24 @@
             </div>
         </div>
         <FloatingButton :icon="logoutIcon" :onClick="handleLogout" />
+        <NavBar></NavBar>
+        
+        <ConfirmDialog
+            v-model:show="showLogoutDialog"
+            title="Conferma logout"
+            message="Sei sicuro di voler effettuare il logout?"
+            confirm-text="Logout"
+            cancel-text="Annulla"
+            @confirm="confirmLogout"
+        />
     </div>
+    
 </template>
 <script lang="ts">
 import Header from "../components/Header.vue";
 import FloatingButton from "../components/FloatingButton.vue";
+import NavBar from "../components/NavBar.vue";
+import ConfirmDialog from "../components/ConfirmDialog.vue";
 import { getData, isUserLoggedIn } from "../utils/storage";
 import logoutIcon from '../assets/images/logout.svg';
 
@@ -33,11 +46,14 @@ export default {
             email: "",
             profilePicture: "",
             logoutIcon: logoutIcon,
+            showLogoutDialog: false,
         };
     },
     components: {
         Header,
         FloatingButton,
+        NavBar,
+        ConfirmDialog
     },
     mounted() {
         if (!isUserLoggedIn()) {
@@ -54,10 +70,11 @@ export default {
     },
     methods: {
         handleLogout() {
-            if (confirm("Sei sicuro di voler effettuare il logout?")) {
-                sessionStorage.setItem("userLoggedIn", "false");
-                this.$router.push('/login');
-            }
+            this.showLogoutDialog = true;
+        },
+        confirmLogout() {
+            sessionStorage.setItem("userLoggedIn", "false");
+            this.$router.push('/login');
         },
     },
 };

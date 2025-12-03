@@ -73,7 +73,7 @@ export default {
 
 .content {
 	align-self: stretch;
-	height: 676px;
+	flex: 1;
 	overflow: hidden;
 	display: flex;
 	flex-direction: column;

@@ -2,6 +2,7 @@
 import Header from "../components/Header.vue";
 import InputChip from "../components/InputChip.vue";
 import ProfileImageUploader from "../components/ProfileImageUploader.vue";
+import ConfirmDialog from "../components/ConfirmDialog.vue";
 import { getData, setData, isUserLoggedIn } from "../utils/storage";
 
 export default {
@@ -12,12 +13,15 @@ export default {
       password: "",
       profilePicture: "",
       isLogin: false,
+      showDialog: false,
+      dialogMessage: "",
     };
   },
   components: {
     Header,
     InputChip,
     ProfileImageUploader,
+    ConfirmDialog,
   },
   mounted() {
     if (isUserLoggedIn()) {
@@ -34,22 +38,26 @@ export default {
     }
   },
   methods: {
+    showAlert(message) {
+      this.dialogMessage = message;
+      this.showDialog = true;
+    },
     handleSubmit() {
       const data = getData();
       
       if (this.isLogin) {
         if (!this.username || !this.password) {
-          alert("Per favore inserisci username e password");
+          this.showAlert("Per favore inserisci username e password");
           return;
         }
         
         if (data.user.username !== this.username) {
-          alert("Username non trovato");
+          this.showAlert("Username non trovato");
           return;
         }
         
         if (data.user.password !== this.password) {
-          alert("Password errata");
+          this.showAlert("Password errata");
           return;
         }
         
@@ -57,17 +65,17 @@ export default {
         this.$router.go(-1);
       } else {
         if (!this.username) {
-          alert("Per favore inserisci un username");
+          this.showAlert("Per favore inserisci un username");
           return;
         }
         
         if (!this.email) {
-          alert("Per favore inserisci un'email");
+          this.showAlert("Per favore inserisci un'email");
           return;
         }
         
         if (!this.password) {
-          alert("Per favore inserisci una password");
+          this.showAlert("Per favore inserisci una password");
           return;
         }
         
@@ -113,6 +121,14 @@ export default {
         <b :class="$style.invia">Invia</b>
       </div>
     </div>
+    
+    <ConfirmDialog
+      v-model:show="showDialog"
+      title="Attenzione"
+      :message="dialogMessage"
+      confirm-text="OK"
+      :show-cancel="false"
+    />
   </div>
 </template>
 <style module>

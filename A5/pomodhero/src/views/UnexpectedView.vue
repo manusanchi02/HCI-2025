@@ -107,12 +107,6 @@ export default {
       setData(data);
     },
   },
-  beforeUnmount() {
-    // Delete recipe when leaving the page in any situation
-    if (!this.showSellModal) {
-      this.deleteRecipe();
-    }
-  },
 };
 </script>
 <template>

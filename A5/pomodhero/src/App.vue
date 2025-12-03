@@ -20,7 +20,7 @@ export default {
 
 <template>
   <div id="app" class="flex flex-col items-center w-full">
-    <!-- Testing Navbar -->
+    <!-- Testing Navbar 
     <nav class="w-full bg-gray-800 text-white p-4">
       <button 
         @click="toggleNav" 
@@ -35,33 +35,13 @@ export default {
           >Recipie Details</router-link
         >
         <router-link
-          to="/login"
-          class="text-sm sm:text-base px-2 py-1 sm:px-3 sm:py-1.5 rounded bg-gray-600 hover:bg-gray-500"
-          >Login</router-link
-        >
-        <router-link
-          to="/profile"
-          class="text-sm sm:text-base px-2 py-1 sm:px-3 sm:py-1.5 rounded bg-gray-600 hover:bg-gray-500"
-          >Profile</router-link
-        >
-        <router-link
           to="/unexpected/0"
           class="text-sm sm:text-base px-2 py-1 sm:px-3 sm:py-1.5 rounded bg-gray-600 hover:bg-gray-500"
           >Imprevisto</router-link
         >
-        <router-link
-          to="/new-recipe/monday/lunch/manual"
-          class="text-sm sm:text-base px-2 py-1 sm:px-3 sm:py-1.5 rounded bg-gray-600 hover:bg-gray-500"
-          >New Recipe (Manual)</router-link
-        >
-        <router-link
-          to="/new-recipe/monday/lunch/audio"
-          class="text-sm sm:text-base px-2 py-1 sm:px-3 sm:py-1.5 rounded bg-gray-600 hover:bg-gray-500"
-          >New Recipe (Audio)</router-link
-        >
       </div>
-    </nav>
+    </nav>-->
 
-    <router-view />
+    <router-view />  
   </div>
 </template>

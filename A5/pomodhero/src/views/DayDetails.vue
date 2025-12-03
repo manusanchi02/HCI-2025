@@ -61,29 +61,30 @@
 		<nav-bar></nav-bar>
 
 		<!-- Confirmation Dialog -->
-		<div v-if="showDeleteDialog" :class="$style.dialogOverlay" @click="closeDialog">
-			<div :class="$style.dialogBox" @click.stop>
-				<h2 :class="$style.dialogTitle">Conferma eliminazione</h2>
-				<p :class="$style.dialogMessage">Sei sicuro di voler eliminare questa ricetta?</p>
-				<div :class="$style.dialogButtons">
-					<button :class="$style.cancelButton" @click="closeDialog">Annulla</button>
-					<button :class="$style.confirmButton" @click="deleteRecipe">Elimina</button>
-				</div>
-			</div>
-		</div>
+		<ConfirmDialog
+			v-model:show="showDeleteDialog"
+			title="Conferma eliminazione"
+			message="Sei sicuro di voler eliminare questa ricetta?"
+			confirm-text="Elimina"
+			cancel-text="Annulla"
+			@confirm="deleteRecipe"
+			@cancel="closeDialog"
+		/>
 	</div>
 </template>
 <script lang="ts">
 import FloatingButton from '../components/FloatingButton.vue';
 import Header from '../components/Header.vue';
 import NavBar from '../components/NavBar.vue';
+import ConfirmDialog from '../components/ConfirmDialog.vue';
 import * as StorageUtils from '../utils/storage.js';
 
 export default {
 	components: {
 		Header,
 		NavBar,
-		FloatingButton
+		FloatingButton,
+		ConfirmDialog
 	},
 	data() {
 		return {
@@ -145,7 +146,7 @@ export default {
 			this.$router.push({
 				name: 'NewRecipe',
 				params: {
-					day: this.weekDay,
+					day: this.weekDay.toLowerCase(),
 					meal: meal,
 					method: method
 				}
@@ -376,7 +377,7 @@ export default {
 
 .content {
 	align-self: stretch;
-	height: 676px;
+	flex: 1;
 	overflow: hidden;
 	display: flex;
 	flex-direction: column;
@@ -634,79 +635,5 @@ export default {
 
 .deleteContainer {
 	cursor: pointer;
-}
-
-.dialogOverlay {
-	position: fixed;
-	top: 0;
-	left: 0;
-	right: 0;
-	bottom: 0;
-	background-color: rgba(0, 0, 0, 0.5);
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	z-index: 1000;
-}
-
-.dialogBox {
-	background: white;
-	border-radius: 24px;
-	padding: 32px 24px;
-	max-width: 320px;
-	width: 90%;
-	box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
-}
-
-.dialogTitle {
-	font-size: 24px;
-	font-weight: 600;
-	color: #003027;
-	margin: 0 0 16px 0;
-	text-align: center;
-}
-
-.dialogMessage {
-	font-size: 16px;
-	color: #1d1b20;
-	margin: 0 0 24px 0;
-	text-align: center;
-	line-height: 1.5;
-}
-
-.dialogButtons {
-	display: flex;
-	gap: 12px;
-	justify-content: center;
-}
-
-.cancelButton,
-.confirmButton {
-	flex: 1;
-	padding: 14px 24px;
-	border-radius: 24px;
-	font-size: 16px;
-	font-weight: 600;
-	cursor: pointer;
-	border: none;
-	transition: all 0.2s;
-}
-
-.cancelButton {
-	background: #f2f4f2;
-	color: #003027;
-}
-
-.cancelButton:hover {
-	background: #e5e7e5;
-}
-
-.confirmButton {
-	background: #CD471F;
-	color: white;
-}
-
-.confirmButton:hover {
-	background: #b33e1a;
 }
 </style>

@@ -1,7 +1,11 @@
 <script>
-import userDefaultImage from '../assets/images/user.svg';
+import userDefaultImage from '../assets/images/user-line.svg';
+import ConfirmDialog from './ConfirmDialog.vue';
 
 export default {
+  components: {
+    ConfirmDialog,
+  },
   props: {
     modelValue: {
       type: String,
@@ -12,6 +16,8 @@ export default {
   data() {
     return {
       defaultImage: userDefaultImage,
+      showDialog: false,
+      dialogMessage: "",
     };
   },
   mounted() {
@@ -36,12 +42,16 @@ export default {
     handleClick() {
       this.$refs.fileInput.click();
     },
+    showAlert(message) {
+      this.dialogMessage = message;
+      this.showDialog = true;
+    },
     handleFileChange(event) {
       const file = event.target.files[0];
       if (!file) return;
 
       if (!file.type.startsWith("image/")) {
-        alert("Per favore seleziona un file immagine valido");
+        this.showAlert("Per favore seleziona un file immagine valido");
         return;
       }
 
@@ -68,6 +78,14 @@ export default {
       accept="image/*"
       :class="$style.hiddenInput"
       @change="handleFileChange"
+    />
+    
+    <ConfirmDialog
+      v-model:show="showDialog"
+      title="Errore"
+      :message="dialogMessage"
+      confirm-text="OK"
+      :show-cancel="false"
     />
   </div>
 </template>

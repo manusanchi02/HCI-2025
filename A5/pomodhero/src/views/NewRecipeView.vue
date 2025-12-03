@@ -2,6 +2,7 @@
 import Header from "../components/Header.vue";
 import InputChip from "../components/InputChip.vue";
 import FloatingButton from "../components/FloatingButton.vue";
+import ConfirmDialog from "../components/ConfirmDialog.vue";
 import { getData, setData } from "../utils/storage";
 import checkIcon from "../assets/images/check.svg";
 import soundWavesGif from "../assets/images/sound-waves.gif";
@@ -11,6 +12,7 @@ export default {
     Header,
     InputChip,
     FloatingButton,
+    ConfirmDialog,
   },
   props: {
     day: {
@@ -54,6 +56,8 @@ export default {
       soundWavesGif,
       isRecording: false,
       isClosing: false,
+      showDialog: false,
+      dialogMessage: "",
     };
   },
   mounted() {
@@ -101,10 +105,14 @@ export default {
         }
       }
     },
+    showAlert(message) {
+      this.dialogMessage = message;
+      this.showDialog = true;
+    },
     saveRecipe() {
       // Validation
       if (!this.title.trim()) {
-        alert("Inserisci un titolo per la ricetta");
+        this.showAlert("Inserisci un titolo per la ricetta");
         return;
       }
 
@@ -113,7 +121,7 @@ export default {
       );
 
       if (validIngredients.length === 0) {
-        alert("Aggiungi almeno un ingrediente");
+        this.showAlert("Aggiungi almeno un ingrediente");
         return;
       }
 
@@ -264,6 +272,15 @@ export default {
       :icon="checkIcon" 
       :on-click="saveRecipe" 
     />
+    
+    <ConfirmDialog
+      v-model:show="showDialog"
+      title="Attenzione"
+      :message="dialogMessage"
+      confirm-text="OK"
+      :show-cancel="false"
+    />
+    
     <!-- Audio Recording Modal -->
     <div v-if="isRecording" :class="$style.modalOverlay" @click="stopRecording">
       <div :class="[$style.audioModal, isClosing ? $style.slideDown : '']" @click.stop>
