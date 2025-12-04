@@ -34,16 +34,15 @@
 					<img src="../assets/images/meal.svg" :class="$style.primaryIcon" alt="" />
 					<div :class="$style.pranzo">Cena</div>
 				</div>
-				<div :class="$style.recipies2">
-					<div v-for="recipe in dinnerRecipes" :key="recipe.id" :class="$style.recipie">
-						<div :class="$style.name2">
+				<div :class="$style.recipies">
+					<div v-for="recipe in dinnerRecipes" v-on:click="openRecipeDetails(recipe.id)" :key="recipe.id" :class="$style.recipie">
+						<div :class="$style.cont">
 							<i :class="$style.pranzo">{{ recipe.title }}</i>
 							<i :class="$style.ingredienti">{{ recipe.ingredients.length }} {{ recipe.ingredients.length
 								=== 1 ? 'ingrediente' : 'ingredienti' }}</i>
 						</div>
-						<div class="w-14 h-14 px-3.5 py-3 bg-white rounded-3xl inline-flex flex-col justify-center items-center gap-2.5 overflow-hidden"
-							@click="confirmDelete(recipe.id, 'dinner')">
-							<img src="../assets/images/delete.svg" :class="$style.deletebuttonIcon" alt="" />
+						<div :class="$style.deleteContainer" @click="confirmDelete(recipe.id, 'dinner')">
+							<img src="../assets/images/delete.svg" :class="$style.deleteIcon" alt="" />
 						</div>
 					</div>
 				</div>
@@ -400,6 +399,7 @@ export default {
 	align-items: flex-start;
 	padding: 18px;
 	gap: 10px;
+	min-height: 0;
 }
 
 .name {
@@ -409,6 +409,7 @@ export default {
 	align-items: center;
 	padding: 0px 13px;
 	gap: 17px;
+	flex-shrink: 0;
 }
 
 .primaryIcon {
@@ -423,12 +424,17 @@ export default {
 
 .recipies {
 	align-self: stretch;
-	overflow: hidden;
+	flex: 1;
+	overflow-y: auto;
+	overflow-x: hidden;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-	justify-content: center;
+	justify-content: flex-start;
 	font-size: 28px;
+	gap: 10px;
+	min-height: 0;
+	padding: 5px 0;
 }
 
 .recipie {
@@ -440,6 +446,7 @@ export default {
 	align-self: stretch;
 	border-radius: 31px;
 	background: #EDB931;
+	flex-shrink: 0;
 }
 
 .name2 {
@@ -465,7 +472,7 @@ export default {
 
 .space {
 	width: 35px;
-	flex: 1;
+	flex: 0;
 	position: relative;
 	overflow: hidden;
 }
@@ -477,6 +484,7 @@ export default {
 	align-items: center;
 	justify-content: flex-end;
 	gap: 10px;
+	flex-shrink: 0;
 }
 
 .audioinputIcon {
