@@ -13,6 +13,7 @@
                 :lunch-ingredients-count="day.lunchIngredientsCount"
                 :dinner-ingredients-count="day.dinnerIngredientsCount"
                 :is-today="day.isToday"
+                :class="$style.listItem"
             ></HomeListItem>
         </div>
         <nav-bar></nav-bar>
@@ -94,7 +95,8 @@ export default {
 <style module>
 .home {
     width: 100%;
-    height: 933px;
+    height: 100vh;
+    max-height: 100vh;
     position: relative;
     box-sizing: border-box;
     background-color: #f2f4f2;
@@ -111,7 +113,8 @@ export default {
 .content {
     align-self: stretch;
     flex: 1;
-    overflow: hidden;
+    overflow-y: auto;
+    overflow-x: hidden;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -119,7 +122,12 @@ export default {
     box-sizing: border-box;
     font-size: 25px;
     color: #003027;
-    overflow-y: auto;
     -webkit-overflow-scrolling: touch;
+    min-height: 0;
+}
+
+.listItem {
+    flex-shrink: 0;
+    min-height: fit-content;
 }
 </style>
