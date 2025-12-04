@@ -5,7 +5,7 @@
             <div :class="$style.itemParent">
                 <MarketItem v-for="(item, index) in marketItems" :key="index" :image="item.image" :title="item.name"
                     :username="item.user" :price="item.price" :expiryDate="item.expirationDate"
-                    :uploadDate="item.uploadDate" />
+                    :uploadDate="item.uploadDate" :quantity="item.quantity" />
             </div>
         </div>
         <nav-bar></nav-bar>
@@ -41,7 +41,7 @@ export default {
 <style module>
 .bacheca {
     width: 100%;
-    height: 933px;
+    height: 100vh;
     position: relative;
     background-color: #f2f4f2;
     box-sizing: border-box;
@@ -58,7 +58,7 @@ export default {
 .content {
     align-self: stretch;
     flex: 1;
-    overflow: hidden;
+    overflow-y: auto;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -70,12 +70,11 @@ export default {
 
 .itemParent {
     align-self: stretch;
-    flex: 1;
-    overflow: hidden;
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 18px 7px;
     justify-content: start;
     align-content: start;
+    padding-bottom: 18px;
 }
 </style>

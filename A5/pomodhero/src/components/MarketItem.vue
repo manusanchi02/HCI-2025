@@ -52,6 +52,10 @@ export default {
         uploadDate: {
             type: String,
             default: ''
+        },
+        quantity: {
+            type: String,
+            default: ''
         }
     },
     computed: {
@@ -69,7 +73,8 @@ export default {
                     username: this.username,
                     price: this.price,
                     expiryDate: this.expiryDate,
-                    uploadDate: this.uploadDate
+                    uploadDate: this.uploadDate,
+                    quantity: this.quantity
                 }
             });
         }
@@ -190,7 +195,7 @@ export default {
 
 .priceText {
     position: relative;
-    font-size: 24px;
+    font-size: 18px;
     color: #003027;
     font-family: Roboto;
 }

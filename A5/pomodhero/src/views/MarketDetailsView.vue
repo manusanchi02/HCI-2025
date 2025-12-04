@@ -9,6 +9,7 @@
                 </div>
                 <div :class="$style.dettagliProdotto">
                     <b :class="$style.b">{{ price }}€</b>
+                    <b :class="$style.quantity" v-if="quantity">Quantità: {{ quantity }}</b>
                     <b :class="$style.cetriolhero">{{ username }}</b>
                     <b :class="$style.pomodhero">{{ dateRange }}</b>
                 </div>
@@ -53,6 +54,9 @@ export default {
         },
         uploadDate() {
             return this.$route.query.uploadDate || '';
+        },
+        quantity() {
+            return this.$route.query.quantity || '';
         },
         dateRange() {
             if (this.uploadDate && this.expiryDate) {
@@ -169,6 +173,17 @@ export default {
     height: 41px;
     position: relative;
     font-size: 25px;
+    line-height: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.quantity {
+    width: 162px;
+    height: 41px;
+    position: relative;
     line-height: 28px;
     display: flex;
     align-items: center;
