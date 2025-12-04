@@ -9,22 +9,22 @@
                 </div>
             </div>
             <div v-for="(ingredient, index) in recipe.ingredients" :key="index"
-                class="self-stretch h-20 py-2.5 bg-zinc-100 inline-flex justify-start items-start gap-2.5 flex-wrap content-start overflow-hidden">
+                class="self-stretch py-2.5 bg-zinc-100 inline-flex justify-start items-center gap-2.5 overflow-hidden">
                 <div data-configuration="Label only" data-selected="False" data-show-closing-icon="false"
                     data-show-focus-indicator="false" data-state="Enabled"
-                    class="w-72 h-14 rounded-lg outline outline-1 outline-offset-[-1px] outline-neutral-500 flex justify-start items-center overflow-hidden">
-                    <div class="px-3 py-1.5 flex justify-center items-center gap-2">
+                    class="flex-1 h-14 rounded-lg outline outline-1 outline-offset-[-1px] outline-neutral-500 flex justify-start items-center overflow-hidden">
+                    <div class="px-3 py-1.5 flex justify-center items-center gap-2 overflow-hidden">
                         <div
-                            class="text-center justify-center text-Schemes-On-Surface-Variant text-base font-normal font-['Roboto'] leading-5 tracking-tight">
+                            class="text-center justify-center text-Schemes-On-Surface-Variant text-base font-normal font-['Roboto'] leading-5 tracking-tight truncate">
                             {{ ingredient.name }}</div>
                     </div>
                 </div>
                 <div data-configuration="Label only" data-selected="False" data-show-closing-icon="false"
                     data-show-focus-indicator="false" data-state="Enabled"
-                    class="w-16 h-14 rounded-lg outline outline-1 outline-offset-[-1px] outline-neutral-500 flex justify-center items-center overflow-hidden">
+                    class="flex-shrink-0 w-20 h-14 rounded-lg outline outline-1 outline-offset-[-1px] outline-neutral-500 flex justify-center items-center overflow-hidden">
                     <div class="px-3 py-1.5 flex justify-center items-center gap-2">
                         <div
-                            class="text-center justify-center text-Schemes-On-Surface-Variant text-base font-normal font-['Roboto'] leading-5 tracking-tight">
+                            class="text-center justify-center text-Schemes-On-Surface-Variant text-base font-normal font-['Roboto'] leading-5 tracking-tight whitespace-nowrap">
                             {{ ingredient.quantity }}</div>
                     </div>
                 </div>
