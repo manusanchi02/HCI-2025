@@ -8,7 +8,7 @@
 					<div :class="$style.pranzo">Pranzo</div>
 				</div>
 				<div :class="$style.recipies">
-					<div v-for="recipe in lunchRecipes" :key="recipe.id" :class="$style.recipie">
+					<div v-for="recipe in lunchRecipes" v-on:click="openRecipeDetails(recipe.id)" :key="recipe.id" :class="$style.recipie">
 						<div :class="$style.cont">
 							<i :class="$style.pranzo">{{ recipe.title }}</i>
 							<i :class="$style.ingredienti">{{ recipe.ingredients.length }} {{ recipe.ingredients.length
@@ -156,7 +156,7 @@ export default {
 			this.storageData = StorageUtils.getData();
 		},
 		openRecipeDetails(recipeId) {
-			this.$router.push({ name: 'RecipieDetails', params: { id: recipeId } });
+			this.$router.push({ name: 'RecipeDetails', params: { id: recipeId } });
 		},
 		confirmDelete(recipeId, mealType) {
 			this.recipeToDelete = recipeId;

@@ -6,7 +6,7 @@ import ChatView from '../views/ChatView.vue'
 import ChatListView from '../views/ChatListView.vue'
 import DayDetails from '../views/DayDetails.vue'
 import MarketDetailsView from '../views/MarketDetailsView.vue'
-import RecipieDetails from '../views/RecipieDetails.vue'
+import RecipeDetailsView from '../views/RecipeDetailsView.vue'
 import LoginView from '../views/LoginView.vue'
 import NewRecipeView from '../views/NewRecipeView.vue'
 import UnexpectedView from '../views/UnexpectedView.vue'
@@ -19,7 +19,7 @@ const routes = [
   { path: '/chat-list', component: ChatListView},
   { path: '/day-details/:weekDay?/:dayNumber?/:month?', name: 'DayDetails', component: DayDetails, props: true},
   { path: '/market-details', name: 'MarketDetailsView', component: MarketDetailsView},
-  { path: '/recipie-details', component: RecipieDetails},
+  { path: '/recipe-details/:id', name:'RecipeDetails', component: RecipeDetailsView, props: true},
   { path: '/login', component: LoginView},
   { path: '/profile', component: ProfileView},
   { path: '/new-recipe/:day/:meal/:method', name: 'NewRecipe', component: NewRecipeView, props: true },
