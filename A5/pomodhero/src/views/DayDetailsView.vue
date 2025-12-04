@@ -14,7 +14,7 @@
 							<i :class="$style.ingredienti">{{ recipe.ingredients.length }} {{ recipe.ingredients.length
 								=== 1 ? 'ingrediente' : 'ingredienti' }}</i>
 						</div>
-						<div :class="$style.deleteContainer" @click="confirmDelete(recipe.id, 'lunch')">
+						<div :class="$style.deleteContainer" @click.stop="confirmDelete(recipe.id, 'lunch')">
 							<img src="../assets/images/delete.svg" :class="$style.deleteIcon" alt="" />
 						</div>
 					</div>
@@ -41,7 +41,7 @@
 							<i :class="$style.ingredienti">{{ recipe.ingredients.length }} {{ recipe.ingredients.length
 								=== 1 ? 'ingrediente' : 'ingredienti' }}</i>
 						</div>
-						<div :class="$style.deleteContainer" @click="confirmDelete(recipe.id, 'dinner')">
+						<div :class="$style.deleteContainer" @click.stop="confirmDelete(recipe.id, 'dinner')">
 							<img src="../assets/images/delete.svg" :class="$style.deleteIcon" alt="" />
 						</div>
 					</div>

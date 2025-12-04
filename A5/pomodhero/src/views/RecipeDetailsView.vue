@@ -42,9 +42,7 @@
         </div>
     </div>
 </template>
-<script lang="ts">
-import { ref, onMounted } from 'vue';
-import { useRoute } from 'vue-router';
+<script>
 import Header from '../components/Header.vue';
 import NavBar from '../components/NavBar.vue';
 import { getData } from '../utils/storage';
@@ -54,26 +52,28 @@ export default {
         Header,
         NavBar,
     },
-    setup() {
-        const route = useRoute();
-        const recipe = ref(null);
-
-        onMounted(() => {
-            const recipeId = parseInt(Array.isArray(route.params.id) ? route.params.id[0] : route.params.id);
-            const data = getData();
-
-            if (data && data.recipes) {
-                recipe.value = data.recipes.find(r => r.id === recipeId);
-            }
-        });
-
+    props: {
+        id: {
+            type: String,
+            required: true,
+        },
+    },
+    data() {
         return {
-            recipe
+            recipe: null,
         };
+    },
+    mounted() {
+        const recipeId = parseInt(this.id);
+        const data = getData();
+
+        if (data && data.recipes) {
+            this.recipe = data.recipes.find(r => r.id === recipeId);
+        }
     },
     methods: {
         openUnexpected() {
-            this.$router.push({ name: 'UnexpectedView', params: {recipe: this.recipe.id} });
+            this.$router.push({ name: 'UnexpectedView', params: { recipe: this.recipe.id } });
         }
     }
 }

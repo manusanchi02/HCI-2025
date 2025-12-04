@@ -68,21 +68,146 @@ export default {
         }
       });
       
-      console.log('Recycled:', recycled);
+      if (recycled.length > 0) {
+        this.recycleIngredients(recycled);
+      }
       
       if (sold.length > 0) {
         this.soldItems = sold;
         this.showSellModal = true;
       } else {
         this.deleteRecipe();
-        this.$router.go(-1);
+        this.$router.push("/");
       }
+    },
+    recycleIngredients(recycled) {
+      const data = getData();
+      const recipeId = parseInt(this.recipe);
+      
+      // Find the current recipe's day
+      let currentDayIndex = -1;
+      data.days.forEach((day, index) => {
+        if (day.lunch.includes(recipeId) || day.dinner.includes(recipeId)) {
+          currentDayIndex = index;
+        }
+      });
+      
+      // Get future days (after current day)
+      const futureDays = currentDayIndex >= 0 
+        ? data.days.slice(currentDayIndex + 1) 
+        : data.days;
+      
+      // Collect all recipes from future days
+      const futureRecipeIds = new Set();
+      futureDays.forEach(day => {
+        if (Array.isArray(day.lunch)) day.lunch.forEach(id => futureRecipeIds.add(id));
+        if (Array.isArray(day.dinner)) day.dinner.forEach(id => futureRecipeIds.add(id));
+      });
+      
+      const futureRecipes = data.recipes.filter(r => futureRecipeIds.has(r.id));
+      
+      // Try to add recycled ingredients to existing recipes
+      const remainingIngredients = [];
+      
+      recycled.forEach(recycledIng => {
+        let added = false;
+        
+        // Search for matching ingredient in future recipes
+        for (let recipe of futureRecipes) {
+          const matchingIng = recipe.ingredients.find(ing => 
+            ing.name.toLowerCase() === recycledIng.name.toLowerCase()
+          );
+          
+          if (matchingIng) {
+            // Parse and sum quantities
+            const currentQty = this.parseQuantity(matchingIng.quantity);
+            const recycledQty = this.parseQuantity(recycledIng.quantity);
+            
+            if (currentQty.unit === recycledQty.unit) {
+              const newQty = currentQty.value + recycledQty.value;
+              matchingIng.quantity = `${newQty} ${currentQty.unit}`;
+              added = true;
+              break;
+            }
+          }
+        }
+        
+        if (!added) {
+          remainingIngredients.push(recycledIng);
+        }
+      });
+      
+      // If there are remaining ingredients, try to add randomly to future recipes
+      if (remainingIngredients.length > 0 && futureRecipes.length > 0) {
+        remainingIngredients.forEach(ing => {
+          const randomRecipe = futureRecipes[Math.floor(Math.random() * futureRecipes.length)];
+          randomRecipe.ingredients.push({
+            name: ing.name,
+            quantity: ing.quantity,
+          });
+        });
+      } 
+      // If no future recipes, create "Avanzi" recipe on Sunday
+      else if (remainingIngredients.length > 0) {
+        const sundayIndex = 6; // Sunday is the last day
+        const sunday = data.days[sundayIndex];
+        
+        // Find or create "Avanzi" recipe
+        let avanziRecipe = data.recipes.find(r => r.title === "Avanzi");
+        
+        if (!avanziRecipe) {
+          const maxId = data.recipes.reduce((max, r) => Math.max(max, r.id), -1);
+          avanziRecipe = {
+            id: maxId + 1,
+            title: "Avanzi",
+            ingredients: [],
+          };
+          data.recipes.push(avanziRecipe);
+          
+          // Add to Sunday dinner if not already there
+          if (!Array.isArray(sunday.dinner)) sunday.dinner = [];
+          if (!sunday.dinner.includes(avanziRecipe.id)) {
+            sunday.dinner.push(avanziRecipe.id);
+          }
+        }
+        
+        // Add remaining ingredients to Avanzi recipe
+        remainingIngredients.forEach(ing => {
+          // Check if ingredient already exists in Avanzi
+          const existingIng = avanziRecipe.ingredients.find(i => 
+            i.name.toLowerCase() === ing.name.toLowerCase()
+          );
+          
+          if (existingIng) {
+            const currentQty = this.parseQuantity(existingIng.quantity);
+            const newQty = this.parseQuantity(ing.quantity);
+            
+            if (currentQty.unit === newQty.unit) {
+              existingIng.quantity = `${currentQty.value + newQty.value} ${currentQty.unit}`;
+            } else {
+              avanziRecipe.ingredients.push({ name: ing.name, quantity: ing.quantity });
+            }
+          } else {
+            avanziRecipe.ingredients.push({ name: ing.name, quantity: ing.quantity });
+          }
+        });
+      }
+      
+      setData(data);
+    },
+    parseQuantity(quantityStr) {
+      // Parse "123.45 gr" format
+      const parts = quantityStr.split(' ');
+      return {
+        value: parseFloat(parts[0]) || 0,
+        unit: parts[1] || '',
+      };
     },
     handleSellSubmit(prices) {
       console.log('Sold items with prices:', prices);
       this.showSellModal = false;
       this.deleteRecipe();
-      this.$router.go(-1);
+      this.$router.pus("/");
     },
     closeSellModal() {
       this.showSellModal = false;
