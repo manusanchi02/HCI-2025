@@ -203,11 +203,29 @@ export default {
         unit: parts[1] || '',
       };
     },
-    handleSellSubmit(prices) {
-      console.log('Sold items with prices:', prices);
+    handleSellSubmit(soldItemsData) {
+      const data = getData();
+      
+      // Get current user from localStorage or use default
+      const currentUser = localStorage.getItem('currentUser') || 'Pomodhero';
+      
+      // Create market posts for each sold item
+      soldItemsData.forEach(item => {
+        const newPost = {
+          name: item.name,
+          quantity: item.quantity,
+          user: currentUser,
+          price: item.price,
+          expiryDate: item.expiryDate,
+          image: item.image || '',
+        };
+        data.market.push(newPost);
+      });
+      
+      setData(data);
       this.showSellModal = false;
       this.deleteRecipe();
-      this.$router.pus("/");
+      this.$router.push("/");
     },
     closeSellModal() {
       this.showSellModal = false;
