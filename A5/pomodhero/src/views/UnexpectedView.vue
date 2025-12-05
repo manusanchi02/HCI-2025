@@ -312,7 +312,7 @@ export default {
     <FloatingButton 
       :style="{ visibility: allIngredientsDecided ? 'visible' : 'hidden' }"
       :icon="checkIcon" 
-      :on-click="saveActions" 
+      :on-click="saveActions"
     />
     <SellModal 
       v-if="showSellModal"

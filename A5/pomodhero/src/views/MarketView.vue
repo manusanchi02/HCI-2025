@@ -8,9 +8,7 @@
                     :uploadDate="item.uploadDate" :quantity="item.quantity" />
             </div>
         </div>
-        <div class="floating-button-wrapper" v-if="isLoggedIn">
-            <FloatingButton :icon="filterIcon" :onClick="toggleFilter" :active="showOnlyMyItems" />
-        </div>
+        <FloatingButton v-if="isLoggedIn" :icon="filterIcon" :onClick="toggleFilter" :active="showOnlyMyItems" bottomOffset="125px" />
         <nav-bar></nav-bar>
     </div>
 </template>
@@ -104,22 +102,4 @@ export default {
     padding-bottom: 18px;
 }
 
-</style>
-
-<style>
-.floating-button-wrapper {
-    position: fixed;
-    bottom: 105px;
-    right: 0;
-    left: 0;
-    z-index: 100;
-    pointer-events: none;
-}
-
-.floating-button-wrapper > div {
-    background-color: transparent !important;
-    padding: 20px !important;
-    width: 100% !important;
-    pointer-events: auto;
-}
 </style>
