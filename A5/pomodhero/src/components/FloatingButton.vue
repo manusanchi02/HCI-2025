@@ -9,13 +9,17 @@ export default {
       type: Function,
       default: () => {},
     },
+    active: {
+      type: Boolean,
+      default: false,
+    },
   },
 };
 </script>
 
 <template>
   <div :class="$style.floatingButton">
-    <div :class="$style.roundButton" @click="onClick">
+    <div :class="[$style.roundButton, { [$style.active]: active }]" @click="onClick">
       <img :src="icon" alt="" />
     </div>
   </div>
@@ -46,5 +50,8 @@ export default {
 }
 .roundButton:active {
   opacity: 0.8;
+}
+.roundButton.active {
+  background-color: #1d1b20;
 }
 </style>
