@@ -25,7 +25,7 @@ export default {
   },
   mounted() {
     if (isUserLoggedIn()) {
-      this.$router.go(-1);
+      this.$router.replace('/');
       return;
     }
     

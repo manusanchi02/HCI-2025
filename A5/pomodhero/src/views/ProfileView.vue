@@ -52,7 +52,7 @@ export default {
     },
     mounted() {
         if (!isUserLoggedIn()) {
-            this.$router.push('/login');
+            this.$router.replace('/login');
             return;
         }
 
