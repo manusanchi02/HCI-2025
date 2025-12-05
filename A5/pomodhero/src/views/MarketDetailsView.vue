@@ -14,8 +14,16 @@
                     <b :class="$style.pomodhero">{{ dateRange }}</b>
                 </div>
             </div>
-            <FloatingButton :icon="contactIcon" :onClick="openChat" />
+            <FloatingButton v-if="showButton" :icon="buttonIcon" :onClick="handleButtonClick" />
         </div>
+        <ConfirmDialog
+            v-model:show="showDeleteDialog"
+            title="Conferma eliminazione"
+            :message="deleteDialogMessage"
+            confirmText="Elimina"
+            cancelText="Annulla"
+            @confirm="confirmDelete"
+        />
         <nav-bar></nav-bar>
     </div>
 </template>
@@ -23,17 +31,24 @@
 import Header from '../components/Header.vue';
 import NavBar from '../components/NavBar.vue';
 import FloatingButton from '../components/FloatingButton.vue';
+import ConfirmDialog from '../components/ConfirmDialog.vue';
 import contactIcon from '../assets/images/contact.svg';
+import deleteIcon from '../assets/images/delete.svg';
+import { getData, setData, isUserLoggedIn } from '../utils/storage';
 
 export default {
     components: {
         Header,
         NavBar,
         FloatingButton,
+        ConfirmDialog,
     },
     data() {
         return {
-            contactIcon: contactIcon
+            contactIcon: contactIcon,
+            deleteIcon: deleteIcon,
+            showDeleteDialog: false,
+            deleteDialogMessage: ''
         };
     },
     computed: {
@@ -63,9 +78,46 @@ export default {
                 return `${this.uploadDate} - ${this.expiryDate}`;
             }
             return this.expiryDate ? `scade il ${this.expiryDate}` : '';
+        },
+        isUserLoggedIn() {
+            return isUserLoggedIn();
+        },
+        isMyItem() {
+            if (!this.isUserLoggedIn) return false;
+            const data = getData();
+            return data && data.user && data.user.username === this.username;
+        },
+        buttonIcon() {
+            return this.isMyItem ? this.deleteIcon : this.contactIcon;
+        },
+        showButton() {
+            return this.isUserLoggedIn;
         }
     },
     methods: {
+        handleButtonClick() {
+            if (this.isMyItem) {
+                this.showDeleteConfirmation();
+            } else {
+                this.openChat();
+            }
+        },
+        showDeleteConfirmation() {
+            this.deleteDialogMessage = `Sei sicuro di voler eliminare "${this.title}" dalla bacheca?`;
+            this.showDeleteDialog = true;
+        },
+        confirmDelete() {
+            const data = getData();
+            if (data && data.market) {
+                // Rimuovo l'oggetto dal market filtrando per nome e utente
+                data.market = data.market.filter(item => 
+                    !(item.name === this.title && item.user === this.username)
+                );
+                setData(data);
+                // Torno alla vista del market
+                this.$router.push('/market');
+            }
+        },
         openChat() {
             if (this.username) {
                 this.$router.push({
