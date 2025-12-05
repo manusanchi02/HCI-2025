@@ -25,6 +25,7 @@
 import Header from '../components/Header.vue';
 import MessageReceiver from '../components/MessageReceiver.vue';
 import MessageSender from '../components/MessageSender.vue';
+import { getMessages, addMessage } from '../utils/storage';
 
 export default {
 	components: {
@@ -49,25 +50,28 @@ export default {
 	computed: {
 		isFromMarket() {
 			return this.$route.query.fromMarket === 'true';
-		},
-		initialMessageTime() {
-			const now = new Date();
-			const tenMinutesAgo = new Date(now.getTime() - 10 * 60 * 1000);
-			return tenMinutesAgo.getHours().toString().padStart(2, '0') + ':' + tenMinutesAgo.getMinutes().toString().padStart(2, '0');
 		}
 	},
 	mounted() {
-		// Add initial message only when coming from navbar (not from market)
-		if (!this.isFromMarket) {
-			this.allMessages.push({
+		// Load messages from storage
+		this.allMessages = getMessages(this.username);
+		
+		// Add initial message only when coming from navbar (not from market) and no messages exist
+		if (!this.isFromMarket && this.allMessages.length === 0) {
+			const tenMinutesAgo = new Date(Date.now() - 10 * 60 * 1000);
+			const initialMessage = {
 				type: 'received',
 				text: 'Ciao dove possiamo vederci?',
-				time: this.initialMessageTime
-			});
-			this.$nextTick(() => {
-				this.scrollToBottom();
-			});
+				time: tenMinutesAgo.getHours().toString().padStart(2, '0') + ':' + 
+				      tenMinutesAgo.getMinutes().toString().padStart(2, '0')
+			};
+			this.allMessages.push(initialMessage);
+			addMessage(this.username, initialMessage);
 		}
+		
+		this.$nextTick(() => {
+			this.scrollToBottom();
+		});
 	},
 	methods: {
 		scrollToBottom() {
@@ -81,11 +85,14 @@ export default {
 			const now = new Date();
 			const time = now.getHours().toString().padStart(2, '0') + ':' + now.getMinutes().toString().padStart(2, '0');
 			
-			this.allMessages.push({
+			const sentMessage = {
 				type: 'sent',
 				text: this.message,
 				time: time
-			});
+			};
+			
+			this.allMessages.push(sentMessage);
+			addMessage(this.username, sentMessage);
 			
 			this.message = '';
 			
@@ -104,11 +111,15 @@ export default {
 						? 'Vediamoci in piazza del pinzimonio'
 						: 'Ok!';
 					
-					this.allMessages.push({
+					const receivedMessage = {
 						type: 'received',
 						text: responseText,
 						time: responseTimeStr
-					});
+					};
+					
+					this.allMessages.push(receivedMessage);
+					addMessage(this.username, receivedMessage);
+					
 					this.$nextTick(() => {
 						this.scrollToBottom();
 					});

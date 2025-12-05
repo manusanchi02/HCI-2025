@@ -158,5 +158,17 @@
         "expirationDate": "23/02/2026",
         "price": 35.99
     }
+  ],
+  "chat": [
+    {
+      "name": "Mandarhero",
+      "messages": [
+        {
+          "type": "received",
+          "text": "Ciao dove possiamo vederci?",
+				  "time": "10 minutes ago"
+        }
+      ]
+    }
   ]
 }
