@@ -47,6 +47,6 @@ export default {
   opacity: 0.8;
 }
 .roundButton.active {
-  background-color: #1d1b20;
+  background-color: #003027;
 }
 </style>

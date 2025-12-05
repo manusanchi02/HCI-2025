@@ -121,6 +121,8 @@ export default {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
+    flex: 1;
+    min-width: 0;
 }
 
 .title {
@@ -138,6 +140,7 @@ export default {
     text-align: center;
     font-size: 10px;
     color: #000;
+    width: 100%;
 }
 
 .usericon {
@@ -172,6 +175,11 @@ export default {
     color: #003027;
     text-align: left;
     font-family: Roboto;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    flex: 1;
+    min-width: 0;
 }
 
 .space {
@@ -179,6 +187,7 @@ export default {
     flex: 1;
     position: relative;
     overflow: hidden;
+    display: none;
 }
 
 .price {
