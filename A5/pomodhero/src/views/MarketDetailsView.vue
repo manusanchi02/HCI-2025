@@ -33,7 +33,7 @@ import NavBar from '../components/NavBar.vue';
 import FloatingButton from '../components/FloatingButton.vue';
 import ConfirmDialog from '../components/ConfirmDialog.vue';
 import contactIcon from '../assets/images/contact.svg';
-import deleteIcon from '../assets/images/delete.svg';
+import deleteIcon from '../assets/images/delete-white.svg';
 import { getData, setData, isUserLoggedIn } from '../utils/storage';
 
 export default {

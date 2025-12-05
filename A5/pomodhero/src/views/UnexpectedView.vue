@@ -3,7 +3,7 @@ import Header from "../components/Header.vue";
 import FloatingButton from "../components/FloatingButton.vue";
 import SellModal from "../components/SellModal.vue";
 import checkIcon from "../assets/images/check.svg";
-import { getData, setData } from "../utils/storage";
+import { getData, setData, isUserLoggedIn } from "../utils/storage";
 
 export default {
   components: {
@@ -29,6 +29,9 @@ export default {
   computed: {
     headerTitle() {
       return this.recipeTitle || "Imprevisto";
+    },
+    allIngredientsDecided() {
+      return this.ingredients.every(ing => ing.action !== null);
     },
   },
   mounted() {
@@ -73,6 +76,12 @@ export default {
       }
       
       if (sold.length > 0) {
+        // Check if user is logged in before allowing to sell
+        if (!isUserLoggedIn()) {
+          this.$router.push('/login');
+          return;
+        }
+        
         this.soldItems = sold;
         this.showSellModal = true;
       } else {
@@ -209,14 +218,26 @@ export default {
       // Get current user from localStorage or use default
       const currentUser = localStorage.getItem('currentUser') || 'Pomodhero';
       
+      // Get today's date in DD/MM/YYYY format
+      const today = new Date();
+      const uploadDate = `${String(today.getDate()).padStart(2, '0')}/${String(today.getMonth() + 1).padStart(2, '0')}/${today.getFullYear()}`;
+      
       // Create market posts for each sold item
       soldItemsData.forEach(item => {
+        // Convert expirationDate from YYYY-MM-DD to DD/MM/YYYY
+        let expirationDate = '';
+        if (item.expiryDate) {
+          const [year, month, day] = item.expiryDate.split('-');
+          expirationDate = `${day}/${month}/${year}`;
+        }
+        
         const newPost = {
           name: item.name,
           quantity: item.quantity,
           user: currentUser,
           price: item.price,
-          expiryDate: item.expiryDate,
+          uploadDate: uploadDate,
+          expirationDate: expirationDate,
           image: item.image || '',
         };
         data.market.push(newPost);
@@ -289,6 +310,7 @@ export default {
       </div>
     </div>
     <FloatingButton 
+      :style="{ visibility: allIngredientsDecided ? 'visible' : 'hidden' }"
       :icon="checkIcon" 
       :on-click="saveActions" 
     />

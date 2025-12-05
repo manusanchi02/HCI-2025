@@ -86,46 +86,53 @@ export default {
         >
           <div :class="$style.ingredientName">{{ item.name }}</div>
           <div :class="$style.ingredientFields">
-            <div :class="$style.priceContainer">
-              <input 
-                v-model="prices[index]"
-                type="number"
-                step="0.01"
-                min="0"
-                placeholder="0.00"
-                :class="$style.priceInput"
-              />
-              <div :class="$style.euro">€</div>
-            </div>
-            <input 
-              v-model="expiryDates[index]"
-              type="date"
-              :class="$style.dateInput"
-              placeholder="Scadenza"
-            />
-            <label :class="$style.imageLabel">
-              <input 
-                type="file"
-                accept="image/*"
-                capture="environment"
-                @change="handleImageUpload(index, $event)"
-                :class="$style.fileInput"
-              />
-              <div :class="$style.imageButton">
-                <img 
-                  v-if="!images[index]"
-                  :src="cameraIcon" 
-                  alt="Camera"
-                  :class="$style.cameraIcon"
+            <div :class="$style.fieldWrapper">
+              <label :class="$style.fieldLabel">Prezzo</label>
+              <div :class="$style.priceContainer">
+                <input 
+                  v-model="prices[index]"
+                  type="number"
+                  step="0.01"
+                  min="0"
+                  placeholder="0.00"
+                  :class="$style.priceInput"
                 />
-                <img 
-                  v-else
-                  :src="images[index]" 
-                  alt="Photo"
-                  :class="$style.photoPreview"
-                />
+                <div :class="$style.euro">€</div>
               </div>
-            </label>
+            </div>
+            <div :class="$style.fieldWrapper">
+              <label :class="$style.fieldLabel">Scadenza</label>
+              <input 
+                v-model="expiryDates[index]"
+                type="date"
+                :class="$style.dateInput"
+              />
+            </div>
+            <div :class="$style.fieldWrapper">
+              <label :class="$style.fieldLabel">Foto</label>
+              <label :class="$style.imageLabel">
+                <input 
+                  type="file"
+                  accept="image/*"
+                  @change="handleImageUpload(index, $event)"
+                  :class="$style.fileInput"
+                />
+                <div :class="$style.imageButton">
+                  <img 
+                    v-if="!images[index]"
+                    :src="cameraIcon" 
+                    alt="Camera"
+                    :class="$style.cameraIcon"
+                  />
+                  <img 
+                    v-else
+                    :src="images[index]" 
+                    alt="Photo"
+                    :class="$style.photoPreview"
+                  />
+                </div>
+              </label>
+            </div>
           </div>
         </div>
       </div>
@@ -216,9 +223,20 @@ export default {
   	}
   	.ingredientFields {
     		display: flex;
-    		align-items: center;
+    		align-items: flex-end;
     		gap: 10px;
     		flex-wrap: nowrap;
+  	}
+  	.fieldWrapper {
+    		display: flex;
+    		flex-direction: column;
+    		gap: 4px;
+  	}
+  	.fieldLabel {
+    		font-size: 12px;
+    		color: #49454f;
+    		font-weight: 500;
+    		text-align: left;
   	}
   	.priceContainer {
     		display: flex;
@@ -291,8 +309,8 @@ export default {
     		height: 45px;
   	}
   	.priceInput {
-    		height: 58px;
-    		width: 89px;
+    		height: 50px;
+    		width: 70px;
     		border-radius: 8px;
     		border: 1px solid #707975;
     		box-sizing: border-box;
@@ -312,12 +330,12 @@ export default {
 			-moz-appearance: textfield;
 	}
 	.euro {
-    		font-size: 20px;
+    		font-size: 18px;
     		color: #49454f;
   	}
   	.dateInput {
-    		height: 40px;
-    		width: 140px;
+    		height: 50px;
+    		width: 120px;
     		border-radius: 8px;
     		border: 1px solid #707975;
     		box-sizing: border-box;
@@ -336,7 +354,7 @@ export default {
     		height: 50px;
     		width: 50px;
     		border-radius: 8px;
-    		background-color: #e1e3e1;
+    		background-color: white;
     		border: 1px solid #707975;
     		display: flex;
     		align-items: center;
