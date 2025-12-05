@@ -33,11 +33,18 @@
 <script lang="ts">
 import Header from '../components/Header.vue';
 import NavBar from '../components/NavBar.vue';
+import { isUserLoggedIn } from '../utils/storage';
 
 export default {
 	components: {
 		Header,
 		NavBar
+	},
+	mounted() {
+		if (!isUserLoggedIn()) {
+			this.$router.replace('/login');
+			return;
+		}
 	},
 	methods: {
 		openChat(username: string) {
