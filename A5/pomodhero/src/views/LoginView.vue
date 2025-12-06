@@ -42,6 +42,28 @@ export default {
       this.dialogMessage = message;
       this.showDialog = true;
     },
+    validateEmail(email) {
+      if (!email.includes('@')) {
+        return "L'email deve contenere il simbolo @";
+      }
+      const afterAt = email.split('@')[1];
+      if (!afterAt || !afterAt.includes('.')) {
+        return "L'email deve contenere un punto (.) dopo la @";
+      }
+      return null;
+    },
+    validatePassword(password) {
+      if (password.length < 8) {
+        return "La password deve essere lunga almeno 8 caratteri";
+      }
+      if (!/[A-Z]/.test(password)) {
+        return "La password deve contenere almeno una lettera maiuscola";
+      }
+      if (!/[!@#$%^&*(),.?":{}|<>]/.test(password)) {
+        return "La password deve contenere almeno un carattere speciale (!@#$%^&*(),.?\":{}|<>)";
+      }
+      return null;
+    },
     handleSubmit() {
       const data = getData();
       
@@ -74,8 +96,20 @@ export default {
           return;
         }
         
+        const emailError = this.validateEmail(this.email);
+        if (emailError) {
+          this.showAlert(emailError);
+          return;
+        }
+        
         if (!this.password) {
           this.showAlert("Per favore inserisci una password");
+          return;
+        }
+        
+        const passwordError = this.validatePassword(this.password);
+        if (passwordError) {
+          this.showAlert(passwordError);
           return;
         }
         
@@ -117,6 +151,9 @@ export default {
         type="password"
         placeholder="Password"
       />
+      <div v-if="!isLogin" :class="$style.passwordHint">
+        La password deve contenere almeno 8 caratteri, una maiuscola e un carattere speciale
+      </div>
       <div :class="$style.submitButton" @click="handleSubmit">
         <b :class="$style.invia">Invia</b>
       </div>
@@ -280,6 +317,15 @@ export default {
 .inputField::placeholder {
   color: #49454f;
   opacity: 0.7;
+}
+.passwordHint {
+  width: 100%;
+  max-width: 359px;
+  font-size: 12px;
+  color: #49454f;
+  text-align: left;
+  padding: 0 12px;
+  margin-top: -5px;
 }
 .submitButton {
   cursor: pointer;

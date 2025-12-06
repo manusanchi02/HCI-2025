@@ -342,6 +342,7 @@ export default {
     		padding: 6px 12px;
     		font-size: 14px;
     		color: #49454f;
+        background-color: white;
     		font-family: Roboto;
   	}
   	.imageLabel {
