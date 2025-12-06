@@ -2,6 +2,7 @@ import initialData from '../assets/store/storage.json'
 import './types'
 
 const STORAGE_KEY = 'pomodhero_data'
+const TUTORIAL_COMPLETED_KEY = 'pomodhero_tutorial_completed'
 
 /**
  * Initializes the local and session storage with default data if not already present
@@ -29,6 +30,22 @@ export function clearStorage() {
 export function isUserLoggedIn() {
   const userLoggedIn = sessionStorage.getItem("userLoggedIn");
   return userLoggedIn === "true";
+}
+
+/**
+ * Checks if the tutorial has been completed
+ * @returns {boolean} True if tutorial has been completed, false otherwise
+ */
+export function isTutorialCompleted() {
+  const completed = localStorage.getItem(TUTORIAL_COMPLETED_KEY);
+  return completed === "true";
+}
+
+/**
+ * Marks the tutorial as completed
+ */
+export function setTutorialCompleted() {
+  localStorage.setItem(TUTORIAL_COMPLETED_KEY, "true");
 }
 
 /**
