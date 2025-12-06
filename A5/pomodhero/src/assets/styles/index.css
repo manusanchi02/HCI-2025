@@ -18,3 +18,9 @@ html, body, #app {
 	-webkit-overflow-scrolling: auto;
 }
 
+.theme {
+	--primary-color: #003027;
+  	--secondary-color: #EDB931;
+  	--background-color: #F2F4F2;
+  	--text-color: #191C1B;
+}

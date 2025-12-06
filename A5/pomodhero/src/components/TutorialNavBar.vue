@@ -13,8 +13,16 @@
         </div>
         <div v-else class="flex-1 overflow-hidden flex flex-col items-center justify-center p-2.5">
         </div>
-        <div class="flex-1 overflow-hidden flex flex-col items-center justify-center p-2.5">
-            <div class="relative">{{ currentPage }}/5</div>
+        <div class="flex-1 overflow-hidden flex items-center justify-center p-2.5 relative">
+            <div class="absolute left-1/2 transform -translate-x-1/2">{{ currentPage }}/5</div>
+            <button 
+                v-if="showSkip"
+                @click="$emit('skip')"
+                class="skip-text absolute"
+                style="right: 0;"
+            >
+                Salta
+            </button>
         </div>
         <div v-if="currentPage < 5"
             class="flex-1 overflow-hidden flex flex-col items-center justify-center p-2.5 cursor-pointer"
@@ -31,10 +39,14 @@
 </template>
 <script setup lang="ts">
 import { useRouter } from 'vue-router'
-import { setTutorialCompleted } from '../utils/storage'
 
 const props = defineProps<{
     currentPage: number
+    showSkip?: boolean
+}>()
+
+defineEmits<{
+    skip: []
 }>()
 
 const router = useRouter()
@@ -50,9 +62,22 @@ function goToNext() {
         router.push(`/tutorial${props.currentPage + 1}`)
     }
 }
-
-function completeTutorial() {
-    setTutorialCompleted()
-    router.push('/')
-}
 </script>
+
+<style scoped>
+.skip-text {
+    font-size: 12px;
+    color: #003027;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-family: 'Montserrat', sans-serif;
+    text-decoration: underline;
+    padding: 0;
+    transition: opacity 0.2s;
+}
+
+.skip-text:active {
+    opacity: 0.7;
+}
+</style>
