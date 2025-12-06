@@ -1,7 +1,7 @@
 <template>
     <div :class="$style.bacheca">
         <Header title="Bacheca" :enable-back="false"></Header>
-        <div :class="$style.tabsContainer">
+        <div v-if="isLoggedIn" :class="$style.tabsContainer">
             <div 
                 :class="[$style.tab, { [$style.activeTab]: activeTab === 'esplora' }]"
                 @click="activeTab = 'esplora'"
@@ -33,7 +33,7 @@
 import Header from '../components/Header.vue';
 import NavBar from '../components/NavBar.vue';
 import MarketItem from '../components/MarketItem.vue';
-import { getData } from '../utils/storage.js';
+import { getData, isUserLoggedIn } from '../utils/storage.js';
 
 export default {
     components: {
@@ -51,6 +51,9 @@ export default {
         }
     },
     computed: {
+        isLoggedIn() {
+            return isUserLoggedIn();
+        },
         filteredMarketItems() {
             if (this.activeTab === 'miei' && this.currentUser) {
                 return this.marketItems.filter(item => item.user === this.currentUser);
