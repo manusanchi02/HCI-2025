@@ -8,7 +8,7 @@
                     :uploadDate="item.uploadDate" :quantity="item.quantity" />
             </div>
         </div>
-        <FloatingButton v-if="isLoggedIn" :icon="filterIcon" :onClick="toggleFilter" :active="showOnlyMyItems" bottomOffset="125px" />
+        <FloatingButton v-if="isLoggedIn" :icon="filterIcon" :onClick="toggleFilter" :active="showOnlyMyItems" navbarOffset />
         <nav-bar></nav-bar>
     </div>
 </template>

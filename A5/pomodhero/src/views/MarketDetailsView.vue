@@ -14,7 +14,7 @@
                     <b :class="$style.pomodhero">{{ dateRange }}</b>
                 </div>
             </div>
-            <FloatingButton v-if="showButton" :icon="buttonIcon" :onClick="handleButtonClick" bottomOffset="125px"/>
+            <FloatingButton v-if="showButton" :icon="buttonIcon" :onClick="handleButtonClick" navbarOffset />
         </div>
         <ConfirmDialog
             v-model:show="showDeleteDialog"

@@ -13,16 +13,16 @@ export default {
       type: Boolean,
       default: false,
     },
-    bottomOffset: {
-      type: String,
-      default: '30px',
+    navbarOffset: {
+      type: Boolean,
+      default: false,
     },
   },
 };
 </script>
 
 <template>
-  <div :class="[$style.roundButton, { [$style.active]: active }]" @click="onClick" :style="{ bottom: bottomOffset }">
+  <div :class="[$style.roundButton, { [$style.active]: active }]" @click="onClick" :style="{ bottom: navbarOffset ? '100px' : '30px' }">
     <img :src="icon" alt="" />
   </div>
 </template>

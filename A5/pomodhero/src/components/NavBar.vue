@@ -41,7 +41,6 @@
 <style module>
 .property1default {
 	width: 100%;
-	height: 95px;
 	position: relative;
 	background-color: #fff;
 	border-top: 1px solid #bbb;
@@ -50,7 +49,7 @@
 	display: flex;
 	align-items: flex-start;
 	justify-content: center;
-	padding: 12px 31px 0px;
+	padding: 12px 31px 12px;
 	gap: 10px;
 	text-align: left;
 	font-size: 12px;
