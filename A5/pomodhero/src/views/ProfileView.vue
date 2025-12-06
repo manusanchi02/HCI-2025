@@ -17,7 +17,7 @@
                 <div :class="$style.fieldValue">{{ email }}</div>
             </div>
         </div>
-        <FloatingButton :icon="logoutIcon" :onClick="handleLogout" />
+        <FloatingButton :icon="logoutIcon" :onClick="handleLogout" navbarOffset/>
         <NavBar></NavBar>
 
         <ConfirmDialog v-model:show="showLogoutDialog" title="Conferma logout"
