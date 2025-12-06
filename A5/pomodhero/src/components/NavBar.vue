@@ -41,7 +41,7 @@
 <style module>
 .property1default {
 	width: 100%;
-	height: 105px;
+	height: 95px;
 	position: relative;
 	background-color: #fff;
 	border-top: 1px solid #bbb;

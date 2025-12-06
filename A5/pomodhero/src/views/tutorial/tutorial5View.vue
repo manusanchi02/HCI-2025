@@ -17,7 +17,7 @@
             <div
                 class="self-stretch px-32 py-4 bg-white rounded-3xl inline-flex justify-center items-center gap-2.5 overflow-hidden cursor-pointer"
                 @click="goToHome">
-                <div class="text-center justify-center text-black text-2xl font-semibold font-['Montserrat'] leading-7">
+                <div class="text-center justify-center text-black text-2xl font-semibold font-['Montserrat'] leading-7 whitespace-nowrap">
                     Entra come ospite</div>
             </div>
         </div>
