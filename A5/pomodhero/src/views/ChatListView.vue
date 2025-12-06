@@ -2,29 +2,11 @@
 	<div :class="$style.chatList">
 		<Header title="Chat" :enable-back="false"></Header>
 		<div :class="$style.content">
-			<div :class="$style.frameParent" @click="openChat('Cetriolhero')">
+			<div v-for="chat in chats" :key="chat.name" :class="$style.frameParent" @click="openChat(chat.name)">
 				<div :class="$style.cWrapper">
-					<b :class="$style.c">C</b>
+					<b :class="$style.c">{{ chat.name.charAt(0).toUpperCase() }}</b>
 				</div>
-				<i :class="$style.cetriolhero">CETRIOLHERO</i>
-			</div>
-			<div :class="$style.frameParent" @click="openChat('Francesco')">
-				<div :class="$style.cWrapper">
-					<b :class="$style.c">F</b>
-				</div>
-				<i :class="$style.cetriolhero">FRANCESCO</i>
-			</div>
-			<div :class="$style.frameParent" @click="openChat('Emanuele')">
-				<div :class="$style.cWrapper">
-					<b :class="$style.c">E</b>
-				</div>
-				<i :class="$style.cetriolhero">EMANUELE</i>
-			</div>
-			<div :class="$style.frameParent" @click="openChat('Tommaso')">
-				<div :class="$style.cWrapper">
-					<b :class="$style.c">T</b>
-				</div>
-				<i :class="$style.cetriolhero">TOMMASO</i>
+				<i :class="$style.cetriolhero">{{ chat.name.toUpperCase() }}</i>
 			</div>
 		</div>
 		<nav-bar></nav-bar>
@@ -33,11 +15,24 @@
 <script lang="ts">
 import Header from '../components/Header.vue';
 import NavBar from '../components/NavBar.vue';
+import { isUserLoggedIn, getChats } from '../utils/storage';
 
 export default {
 	components: {
 		Header,
 		NavBar
+	},
+	data() {
+		return {
+			chats: []
+		}
+	},
+	mounted() {
+		if (!isUserLoggedIn()) {
+			this.$router.replace('/login');
+			return;
+		}
+		this.chats = getChats();
 	},
 	methods: {
 		openChat(username: string) {

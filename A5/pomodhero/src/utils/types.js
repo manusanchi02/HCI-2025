@@ -1,44 +1,48 @@
 /**
  * @typedef {Object} User
- * @property {string} username - Nome utente
- * @property {string} email - Email dell'utente
- * @property {string} password - Password dell'utente
- * @property {string} profilePicture - URL o path dell'immagine profilo
+ * @property {string} username - Username
+ * @property {string} email - User's email
+ * @property {string} password - User's password
+ * @property {string} profilePicture - Profile picture URL or path
  */
 
 /**
  * @typedef {Object} Ingredient
- * @property {string} name - Nome dell'ingrediente
- * @property {string} quantity - Quantità dell'ingrediente
+ * @property {string} name - Ingredient name
+ * @property {string} quantity - Ingredient quantity
  */
 
 /**
  * @typedef {Object} Recipe
- * @property {number} id - ID univoco della ricetta
- * @property {string} title - Titolo della ricetta
- * @property {Ingredient[]} ingredients - Lista degli ingredienti
+ * @property {number} id - Unique recipe ID
+ * @property {string} title - Recipe title
+ * @property {Ingredient[]} ingredients - List of ingredients
  */
 
 /**
  * @typedef {Object} Day
- * @property {string} name - Nome del giorno (es. "Monday", "Tuesday")
- * @property {number[]} lunch - Array di ID delle ricette per il pranzo
- * @property {number[]} dinner - Array di ID delle ricette per la cena
+ * @property {string} name - Day name (e.g. "Monday", "Tuesday")
+ * @property {number[]} lunch - Array of recipe IDs for lunch
+ * @property {number[]} dinner - Array of recipe IDs for dinner
  */
 
 /**
  * @typedef {Object} MarketItem
- * @property {string} name - Nome dell'articolo
- * @property {string} quantity - Quantità da acquistare
- * @property {string} user - Utente che ha aggiunto l'articolo
+ * @property {string} name - Item name
+ * @property {string} quantity - Item quantity
+ * @property {string} user - User who added the item
+ * @property {number} price - Item price
+ * @property {string} uploadDate - Upload date (YYYY-MM-DD)
+ * @property {string} expirationDate - Expiration date (YYYY-MM-DD)
+ * @property {string} image - Item image in base64
  */
 
 /**
  * @typedef {Object} AppData
- * @property {User} user - Dati dell'utente
- * @property {Day[]} days - Pianificazione settimanale dei pasti
- * @property {Recipe[]} recipes - Lista di tutte le ricette disponibili
- * @property {MarketItem[]} market - Lista della spesa
+ * @property {User} user - User data
+ * @property {Day[]} days - Weekly meal planning
+ * @property {Recipe[]} recipes - List of all available recipes
+ * @property {MarketItem[]} market - Shopping list
  */
 
 export {}

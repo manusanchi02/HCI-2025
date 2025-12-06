@@ -1,5 +1,11 @@
 <script>
+import cameraIcon from "../assets/images/camera.svg";
+import ConfirmDialog from "./ConfirmDialog.vue";
+
 export default {
+  components: {
+    ConfirmDialog,
+  },
   props: {
     items: {
       type: Array,
@@ -8,25 +14,63 @@ export default {
   },
   data() {
     return {
+      cameraIcon,
       prices: {},
+      expiryDates: {},
+      images: {},
+      showErrorDialog: false,
+      errorMessage: '',
     };
   },
   mounted() {
     this.items.forEach((item, index) => {
       this.prices[index] = '';
+      this.expiryDates[index] = '';
+      this.images[index] = '';
     });
   },
   methods: {
     handleSubmit() {
+      // Validazione: tutti i campi devono essere compilati
+      for (let index = 0; index < this.items.length; index++) {
+        if (!this.prices[index] || parseFloat(this.prices[index]) <= 0) {
+          this.errorMessage = `Inserisci un prezzo valido per ${this.items[index].name}`;
+          this.showErrorDialog = true;
+          return;
+        }
+        if (!this.expiryDates[index]) {
+          this.errorMessage = `Inserisci la data di scadenza per ${this.items[index].name}`;
+          this.showErrorDialog = true;
+          return;
+        }
+        if (!this.images[index]) {
+          this.errorMessage = `Scatta una foto per ${this.items[index].name}`;
+          this.showErrorDialog = true;
+          return;
+        }
+      }
+      
       const result = this.items.map((item, index) => ({
         name: item.name,
         quantity: item.quantity,
-        price: parseFloat(this.prices[index]) || 0,
+        price: parseFloat(this.prices[index]),
+        expiryDate: this.expiryDates[index],
+        image: this.images[index],
       }));
       this.$emit('submit', result);
     },
     handleClose() {
       this.$emit('close');
+    },
+    handleImageUpload(index, event) {
+      const file = event.target.files[0];
+      if (file) {
+        const reader = new FileReader();
+        reader.onload = (e) => {
+          this.images[index] = e.target.result;
+        };
+        reader.readAsDataURL(file);
+      }
     },
   },
 };
@@ -40,16 +84,56 @@ export default {
           :key="index" 
           :class="$style.ingredientToSell"
         >
-          <div :class="$style.ingredient1">{{ item.name }}</div>
-          <input 
-            v-model="prices[index]"
-            type="number"
-            step="0.01"
-            min="0"
-            placeholder="0.00"
-            :class="$style.priceInput"
-          />
-          <div :class="$style.euro">€</div>
+          <div :class="$style.ingredientName">{{ item.name }}</div>
+          <div :class="$style.ingredientFields">
+            <div :class="$style.fieldWrapper">
+              <label :class="$style.fieldLabel">Prezzo</label>
+              <div :class="$style.priceContainer">
+                <input 
+                  v-model="prices[index]"
+                  type="number"
+                  step="0.01"
+                  min="0"
+                  placeholder="0.00"
+                  :class="$style.priceInput"
+                />
+                <div :class="$style.euro">€</div>
+              </div>
+            </div>
+            <div :class="$style.fieldWrapper">
+              <label :class="$style.fieldLabel">Scadenza</label>
+              <input 
+                v-model="expiryDates[index]"
+                type="date"
+                :class="$style.dateInput"
+              />
+            </div>
+            <div :class="$style.fieldWrapper">
+              <label :class="$style.fieldLabel">Foto</label>
+              <label :class="$style.imageLabel">
+                <input 
+                  type="file"
+                  accept="image/*"
+                  @change="handleImageUpload(index, $event)"
+                  :class="$style.fileInput"
+                />
+                <div :class="$style.imageButton">
+                  <img 
+                    v-if="!images[index]"
+                    :src="cameraIcon" 
+                    alt="Camera"
+                    :class="$style.cameraIcon"
+                  />
+                  <img 
+                    v-else
+                    :src="images[index]" 
+                    alt="Photo"
+                    :class="$style.photoPreview"
+                  />
+                </div>
+              </label>
+            </div>
+          </div>
         </div>
       </div>
       <div :class="$style.button">
@@ -58,6 +142,13 @@ export default {
         </div>
       </div>
     </div>
+    <ConfirmDialog
+      v-model:show="showErrorDialog"
+      :message="errorMessage"
+      title="Attenzione"
+      :show-cancel="false"
+      confirm-text="OK"
+    />
   </div>
 </template>
 <style module>
@@ -118,22 +209,39 @@ export default {
   	.ingredientToSell {
     		align-self: stretch;
     		border-bottom: 1px solid #707975;
-    		overflow: hidden;
+    		overflow: visible;
     		display: flex;
-    		align-items: center;
-    		padding: 21px 44px;
+    		flex-direction: column;
+    		align-items: stretch;
+    		padding: 15px 20px;
     		gap: 10px;
   	}
-  	.ingredient1 {
-    		align-self: stretch;
-    		width: 174px;
-    		position: relative;
-    		letter-spacing: 0.1px;
-    		line-height: 20px;
+  	.ingredientName {
+    		font-size: 18px;
+    		font-weight: 500;
+    		margin-bottom: 5px;
+  	}
+  	.ingredientFields {
+    		display: flex;
+    		align-items: flex-end;
+    		gap: 10px;
+    		flex-wrap: nowrap;
+  	}
+  	.fieldWrapper {
+    		display: flex;
+    		flex-direction: column;
+    		gap: 4px;
+  	}
+  	.fieldLabel {
+    		font-size: 12px;
+    		color: #49454f;
+    		font-weight: 500;
+    		text-align: left;
+  	}
+  	.priceContainer {
     		display: flex;
     		align-items: center;
-    		justify-content: center;
-    		flex-shrink: 0;
+    		gap: 5px;
   	}
   	.inputChip {
     		height: 58px;
@@ -201,8 +309,8 @@ export default {
     		height: 45px;
   	}
   	.priceInput {
-    		height: 58px;
-    		width: 89px;
+    		height: 50px;
+    		width: 70px;
     		border-radius: 8px;
     		border: 1px solid #707975;
     		box-sizing: border-box;
@@ -222,8 +330,50 @@ export default {
 			-moz-appearance: textfield;
 	}
 	.euro {
-    		font-size: 20px;
+    		font-size: 18px;
     		color: #49454f;
+  	}
+  	.dateInput {
+    		height: 50px;
+    		width: 120px;
+    		border-radius: 8px;
+    		border: 1px solid #707975;
+    		box-sizing: border-box;
+    		padding: 6px 12px;
+    		font-size: 14px;
+    		color: #49454f;
+    		font-family: Roboto;
+  	}
+  	.imageLabel {
+    		cursor: pointer;
+  	}
+  	.fileInput {
+    		display: none;
+  	}
+  	.imageButton {
+    		height: 50px;
+    		width: 50px;
+    		border-radius: 8px;
+    		background-color: white;
+    		border: 1px solid #707975;
+    		display: flex;
+    		align-items: center;
+    		justify-content: center;
+    		transition: background-color 0.2s;
+    		overflow: hidden;
+  	}
+  	.imageButton:hover {
+    		background-color: #d1d3d1;
+  	}
+  	.cameraIcon {
+    		height: 30px;
+    		width: 30px;
+    		filter: invert(30%);
+  	}
+  	.photoPreview {
+    		width: 100%;
+    		height: 100%;
+    		object-fit: cover;
   	}
 
 </style>

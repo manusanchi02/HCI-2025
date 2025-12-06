@@ -64,3 +64,69 @@ export function getData() {
 export function setData(data) {
   localStorage.setItem(STORAGE_KEY, JSON.stringify(data))
 }
+
+/**
+ * Gets all chats from storage
+ * @returns {Array} Array of chat objects
+ */
+export function getChats() {
+  const data = getData()
+  return data?.chat || []
+}
+
+/**
+ * Gets a specific chat by username
+ * @param {string} username - The username to search for
+ * @returns {object | null} The chat object or null if not found
+ */
+export function getChatByUsername(username) {
+  const chats = getChats()
+  return chats.find(chat => chat.name.toLowerCase() === username.toLowerCase()) || null
+}
+
+/**
+ * Gets messages for a specific username
+ * @param {string} username - The username to get messages for
+ * @returns {Array} Array of messages
+ */
+export function getMessages(username) {
+  const chat = getChatByUsername(username)
+  if (!chat) return []
+  
+  // Calculate time for messages marked as "10 minutes ago"
+  return chat.messages.map(msg => {
+    if (msg.time === "10 minutes ago") {
+      const tenMinutesAgo = new Date(Date.now() - 10 * 60 * 1000)
+      return {
+        ...msg,
+        time: tenMinutesAgo.getHours().toString().padStart(2, '0') + ':' + 
+              tenMinutesAgo.getMinutes().toString().padStart(2, '0')
+      }
+    }
+    return msg
+  })
+}
+
+/**
+ * Adds a message to a specific chat
+ * @param {string} username - The username to add the message to
+ * @param {object} message - The message object {type, text, time}
+ */
+export function addMessage(username, message) {
+  const data = getData()
+  if (!data) return
+  
+  const chatIndex = data.chat.findIndex(chat => chat.name.toLowerCase() === username.toLowerCase())
+  
+  if (chatIndex !== -1) {
+    data.chat[chatIndex].messages.push(message)
+  } else {
+    // Create new chat if it doesn't exist
+    data.chat.push({
+      name: username,
+      messages: [message]
+    })
+  }
+  
+  setData(data)
+}

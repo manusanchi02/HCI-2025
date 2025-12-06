@@ -3,11 +3,12 @@
         <Header title="Bacheca" :enable-back="false"></Header>
         <div :class="$style.content">
             <div :class="$style.itemParent">
-                <MarketItem v-for="(item, index) in marketItems" :key="index" :image="item.image" :title="item.name"
+                <MarketItem v-for="(item, index) in filteredMarketItems" :key="index" :image="item.image" :title="item.name"
                     :username="item.user" :price="item.price" :expiryDate="item.expirationDate"
                     :uploadDate="item.uploadDate" :quantity="item.quantity" />
             </div>
         </div>
+        <FloatingButton v-if="isLoggedIn" :icon="filterIcon" :onClick="toggleFilter" :active="showOnlyMyItems" bottomOffset="125px" />
         <nav-bar></nav-bar>
     </div>
 </template>
@@ -15,17 +16,34 @@
 import Header from '../components/Header.vue';
 import NavBar from '../components/NavBar.vue';
 import MarketItem from '../components/MarketItem.vue';
-import { getData } from '../utils/storage.js';
+import FloatingButton from '../components/FloatingButton.vue';
+import { getData, isUserLoggedIn } from '../utils/storage.js';
+import filterIcon from '../assets/images/filter.svg';
 
 export default {
     components: {
         Header,
         NavBar,
-        MarketItem
+        MarketItem,
+        FloatingButton
     },
     data() {
         return {
-            marketItems: []
+            marketItems: [],
+            showOnlyMyItems: false,
+            currentUser: '',
+            filterIcon: filterIcon
+        }
+    },
+    computed: {
+        isLoggedIn() {
+            return isUserLoggedIn();
+        },
+        filteredMarketItems() {
+            if (!this.showOnlyMyItems || !this.currentUser) {
+                return this.marketItems;
+            }
+            return this.marketItems.filter(item => item.user === this.currentUser);
         }
     },
     mounted() {
@@ -33,8 +51,14 @@ export default {
         if (data && data.market) {
             this.marketItems = data.market;
         }
+        if (data && data.user) {
+            this.currentUser = data.user.username || '';
+        }
     },
     methods: {
+        toggleFilter() {
+            this.showOnlyMyItems = !this.showOnlyMyItems;
+        }
     },
 }
 </script>
@@ -77,4 +101,5 @@ export default {
     align-content: start;
     padding-bottom: 18px;
 }
+
 </style>
