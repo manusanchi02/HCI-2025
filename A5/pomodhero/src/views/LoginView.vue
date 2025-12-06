@@ -171,7 +171,7 @@ export default {
 <style module>
 .logInSignIn {
   width: 100%;
-  height: 933px;
+  height: 100vh;
   position: relative;
   background-color: #f2f4f2;
   box-sizing: border-box;
@@ -197,71 +197,10 @@ export default {
   gap: 20px;
   text-align: left;
 }
-.time {
-  position: relative;
-  letter-spacing: 0.01em;
-  line-height: 20px;
-  font-weight: 500;
-  z-index: 0;
-}
-.rightIcons {
-  height: 17px;
-  width: 46px;
-  position: relative;
-  z-index: 1;
-}
-.cameraCutoutIcon {
-  height: 24px;
-  width: 24px;
-  position: absolute;
-  margin: 0 !important;
-  top: 18px;
-  left: calc(50% - 12px);
-  z-index: 2;
-}
-.header {
-  align-self: stretch;
-  overflow: hidden;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 10px 36px;
-  font-size: 32px;
-  color: #191c1b;
-}
-.leftheader {
-  overflow: hidden;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  padding: 5px 0px;
-  gap: 15px;
-}
-.leftheaderChild {
-  width: 22px;
-  height: 22px;
-}
-.pomodhero {
-  position: relative;
-  line-height: 28px;
-}
-.rightheader {
-  align-self: stretch;
-  flex: 1;
-  overflow: hidden;
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-}
-.icon {
-  height: 64px;
-  width: 64px;
-  position: relative;
-}
 .userImage {
   align-self: stretch;
-  height: 746px;
-  overflow: hidden;
+  flex: 1;
+  overflow-y: auto;
   display: flex;
   flex-direction: column;
   align-items: center;
