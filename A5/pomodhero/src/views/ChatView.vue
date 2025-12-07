@@ -108,7 +108,7 @@ export default {
 					const responseTimeStr = responseTime.getHours().toString().padStart(2, '0') + ':' + responseTime.getMinutes().toString().padStart(2, '0');
 					
 					const responseText = this.isFromMarket 
-						? 'Vediamoci in piazza del pinzimonio'
+						? 'Vediamoci in piazza del pinzimonio alle 18:00'
 						: 'Ok!';
 					
 					const receivedMessage = {
