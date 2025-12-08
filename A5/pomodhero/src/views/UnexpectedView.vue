@@ -215,8 +215,8 @@ export default {
     handleSellSubmit(soldItemsData) {
       const data = getData();
       
-      // Get current user from localStorage or use default
-      const currentUser = localStorage.getItem('currentUser') || 'Pomodhero';
+      // Get current user from storage
+      const currentUser = data.user?.username || 'Pomodhero';
       
       // Get today's date in DD/MM/YYYY format
       const today = new Date();
