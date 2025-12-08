@@ -56,6 +56,8 @@ function skipTutorial() {
 .tutorial-wrapper {
   width: 100%;
   height: 100vh;
+  background-color: #F2F4F2;
+  padding: 30px 21px;
   overflow: hidden;
   display: flex;
   flex-direction: column;
