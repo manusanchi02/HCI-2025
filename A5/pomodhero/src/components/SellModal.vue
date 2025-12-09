@@ -20,6 +20,7 @@ export default {
       images: {},
       showErrorDialog: false,
       errorMessage: '',
+      minDate: new Date().toISOString().split('T')[0],
     };
   },
   mounted() {
@@ -105,6 +106,7 @@ export default {
               <input 
                 v-model="expiryDates[index]"
                 type="date"
+                :min="minDate"
                 :class="$style.dateInput"
               />
             </div>
