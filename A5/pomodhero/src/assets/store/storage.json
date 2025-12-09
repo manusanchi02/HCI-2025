@@ -9,7 +9,7 @@
   "days": [
     {
       "name": "Monday",
-      "lunch": [0],
+      "lunch": [],
       "dinner": []
     },
     {
