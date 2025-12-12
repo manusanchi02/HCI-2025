@@ -1,4 +1,4 @@
-Quello che ti stiamo per mostrare è il prototipo della nostra applicazione, oggi ci aiuterai a fare un test di usabilità: 
+&nbsp;Quello che ti stiamo per mostrare è il prototipo della nostra applicazione, oggi ci aiuterai a fare un test di usabilità:
 
 in questo test noi ti chiederemo di svolgere alcuni task all'interno del prototipo in modo tale che poi noi potremmo andare a capire se ci sono dei punti deboli o degli errori da correggere a livello di usabilità.
 
@@ -14,7 +14,7 @@ in ogni momento comunque se sei confuso, o se hai qualche domanda puoi chiedere 
 
 ok, penso di averti dato tutte le istruzioni necessarie quindi direi che possiamo iniziare il test, adesso appunto ti descriverò una situazione e un task da svolgere all'interno dell'app, tu dovrai completare il task descrivendomi ad alta voce il processo, come ti ho spiegato precedentemente. Quando pensi di aver completato il task o se non sai più come procedere oltre puoi dire "Ho completato il task" e passeremo al task successivo.
 
-task 1. 
+task 1.
 immagina di voler programmare i pasti della giornata di domani, quindi inserisci almeno due ricette nel piano settimanale. inseriscine almeno una manualmente e almeno una utilizzando il comando vocale.
 
 task 2.
@@ -23,11 +23,13 @@ immagina: ora che hai programmato per bene le ricette da preparare, improvvisame
 task 3.
 Ora immagina che ancora una volta un imprevisto ti impedisca di preparare una ricetta che avevi programmato. utilizza l'applicazione per gestire l'imprevisto mettendo tutti gli ingredienti della ricetta in vendita nella bacheca pubblica.
 
+
+
 ti ringraziamo tantissimo per il tuo contributo, la tua descrizione ad alta voce dei pensieri è stata ottima e ci sarà di grande aiuto. grazie ancora. per concludere ti facciamo giusto qualche altra domanda aggiuntiva:
+
 
 
 1. Qual’è la tua impressione generale dell’applicazione? La useresti nella vita di tutti i giorni?
 2. Cosa ne pensi della qualità della navigazione tra le varie pagine dell’applicazione?
 3. Come ti sei trovato ad eseguire i task?
 4. C’è qualcosa che cambieresti o faresti in un altro modo?
-
