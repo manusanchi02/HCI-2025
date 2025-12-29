@@ -43,11 +43,20 @@
   </TutorialWrapper>
 </template>
 <script setup lang="ts">
+import { onMounted } from "vue";
 import { useRouter } from "vue-router";
 import TutorialWrapper from "../../components/TutorialWrapper.vue";
 import { setTutorialCompleted } from "../../utils/storage";
 
 const router = useRouter();
+
+onMounted(() => {
+  const isUserLoggedIn = sessionStorage.getItem('userLoggedIn') === 'true';
+  if (isUserLoggedIn) {
+    setTutorialCompleted();
+    router.push("/");
+  }
+});
 
 function goToLogin() {
   setTutorialCompleted();
